@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Critter</title>
+<title>City Tour</title>
 <c:url var="bootstrapCss" value="/css/bootstrap.min.css" />
 <c:url var="siteCss" value="/css/site.css" />
 

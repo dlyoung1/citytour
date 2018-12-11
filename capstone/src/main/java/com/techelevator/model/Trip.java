@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trip {
@@ -14,6 +15,10 @@ public class Trip {
 	private int tripCityZipCode;
 	private int exploreRadius;
 	private List<Place> tripStops;
+	
+	public Trip() {
+		this.tripStops = new ArrayList<Place>();
+	}
 	
 	public int getTripId() {
 		return tripId;
@@ -65,6 +70,9 @@ public class Trip {
 	}
 	public List<Place> getTripStops() {
 		return tripStops;
+	}
+	public void setTripStops(List<Place> tripStops) {
+		this.tripStops = tripStops;
 	}
 	public void addStopToTripStops(Place place) {
 		this.tripStops.add(place);

@@ -5,10 +5,10 @@
 BEGIN;
 
 -- CREATE statements go here
-DROP TABLE IF EXISTS app_user;
-DROP TABLE IF EXISTS trip;
-DROP TABLE IF EXISTS place;
 DROP TABLE IF EXISTS trip_place;
+DROP TABLE IF EXISTS trip;
+DROP TABLE IF EXISTS app_user;
+DROP TABLE IF EXISTS place;
 
 
 CREATE TABLE app_user (
@@ -27,8 +27,8 @@ CREATE TABLE trip (
   create_date timestamptz NOT NULL,
   last_edit_date timestamptz,
   departure_date timestamptz,
-  trip_city_zip_code integer(5) NOT NULL,
-  explore_radius integer(3) NOT NULL,
+  trip_city_zip_code integer CHECK (trip_city_zip_code >= 10000 AND trip_city_zip_code <= 99999) NOT NULL,
+  explore_radius integer CHECK (explore_radius >= 1 AND explore_radius <= 999) NOT NULL,
   CONSTRAINT pk_trip_id PRIMARY KEY (id),
   CONSTRAINT fk_trip_user_id FOREIGN KEY (user_id) REFERENCES app_user(id)
 );

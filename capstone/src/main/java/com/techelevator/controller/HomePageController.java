@@ -11,4 +11,9 @@ public class HomePageController {
 	public String viewHomePage(ModelMap map) {
 		return "homePage";
 	}
+	
+	@RequestMapping("/searchPlaces")
+	public String searchPlaces() {
+		return "searchPlaces";
+	}
 }

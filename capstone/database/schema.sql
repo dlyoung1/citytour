@@ -45,7 +45,7 @@ CREATE TABLE place (
 CREATE TABLE trip_place (
   trip_id integer NOT NULL,
   place_id integer NOT NULL,
-  stop_number integer NOT NULL,
+  stop_number integer,
   CONSTRAINT pk_trip_place_trip_id_place_id PRIMARY KEY (trip_id, place_id),
   CONSTRAINT fk_trip_place_trip_id FOREIGN KEY (trip_id) REFERENCES trip(id),
   CONSTRAINT fk_trip_place_place_id FOREIGN KEY (place_id) REFERENCES place(id)

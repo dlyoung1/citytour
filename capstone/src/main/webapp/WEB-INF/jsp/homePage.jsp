@@ -26,7 +26,7 @@ input[type=text] {
   float: none; 
   margin-bottom: 50px;
   word-wrap: break-word;
-  max-width: 750px;
+  max-width: 700px;
   
 }
 
@@ -73,7 +73,6 @@ hr {
 .highlight {
 	background-color: white;
 	opacity: 0.8;
-	border-radius: 12px;
 	padding: 6px;
 	
 }
@@ -89,18 +88,18 @@ hr {
   <div class="wrapper">
   <img class="card-img" src="${imgcitygifSrc}" alt="Card image" style="opacity: 0.35;">
   <div class="card-img-overlay">
-    <h2 class="card-title"><strong>Are you looking to maximize your time in a new city?</strong></h2><hr><br>
+    <h2 class="card-title"><strong>Looking to maximize your time in a new city?</strong></h2><hr><br>
     <p class="card-text"><span class="highlight">Let <span style="font-family: 'Special Elite', cursive;
 					font-size: 18px; font-weight: bold">&nbsp;City Tour&nbsp;</span> help you plan the most efficient route to see as many local landmarks as possible!</span></p>
     <br>
     <form>
 		<input type="text" name="cityZipCode" placeholder="Enter City Name or Zip Code"><br>
 	</form>
-	<a href="#" class="btn btn-warning">Let's Get Started!</a>
+	<c:url var="searchPlacesHref" value="/searchPlaces" />
+	<a href="${searchPlacesHref}" class="btn btn-warning">Let's Get Started!</a>
   </div>
    </div>
 </div>
-
 </body>
 </html>
 <c:import url="/WEB-INF/jsp/footer.jsp" />

@@ -112,7 +112,7 @@ h3 {
 		<a class="navbar-brand" href="#"> <c:url var="homePageHref"
 				value="/" /> <c:url var="imgSrc" value="/img/marker3.png" /><a
 			href="${homePageHref}"><img src="${imgSrc}" class="img-fluid"
-				style="height: 48px;" /></a>
+				style="height: 38px;" /></a>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -125,25 +125,25 @@ h3 {
 			<ul class="navbar-nav mr-auto">
 				<c:url var="homePageHref" value="/" />
 				<li class="nav-item"><a class="nav-link" href="${homePageHref}"
-					style="font-family: 'Special Elite', cursive; font-size: 35px; color: rgb(255, 195, 0); font-weight: bold">City
+					style="font-family: 'Special Elite', cursive; font-size: 28px; color: rgb(255, 195, 0); font-weight: bold">City
 						Tour</a></li>
 				
 				<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
-					<li class="nav-item"><a class="nav-link"
-						href="${dashboardHref}">Completed Trips</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="${dashboardHref}" style="color: black">Completed Trips</a></li>
 					<c:url var="newMessageHref"
 						value="/users/${currentUser}/messages/new" />
 					<li class="nav-item"><a class="nav-link"
-						href="${newMessageHref}">Upcoming Trips</a></li>
+						href="${newMessageHref}" style="color: black">Upcoming Trips</a></li>
 					<c:url var="sentMessagesHref"
 						value="/users/${currentUser}/messages" />
 					<li class="nav-item"><a class="nav-link"
-						href="${sentMessagesHref}">Sent Messages</a></li>
+						href="${sentMessagesHref}" style="color: black">Sent Messages</a></li>
 					<c:url var="changePasswordHref"
 						value="/users/${currentUser}/changePassword" />
 					<li class="nav-item"><a class="nav-link"
-						href="${changePasswordHref}">Change Password</a></li>
+						href="${changePasswordHref}" style="color: black">Change Password</a></li>
 				</c:if>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -233,7 +233,7 @@ h3 {
 						<form id="logoutForm" action="${logoutAction}" method="POST">
 							<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 						</form>
-						<li class="nav-item"><a id="logoutLink" href="#">Log Out</a></li>
+						<li class="nav-item"><a id="logoutLink" href="#" style="color: black">Log Out</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

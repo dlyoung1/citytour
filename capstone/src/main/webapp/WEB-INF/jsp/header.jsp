@@ -173,8 +173,8 @@ h3 {
 														placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="password">Password: </label> <input
-														type="password" id="password" name="password"
+													<label for="loginPassword">Password: </label> <input
+														type="password" id="loginPassword" name="password"
 														placeHolder="Password" class="form-control" />
 												</div>
 												<button type="submit" class="btn btn-warning">Login</button>
@@ -207,8 +207,8 @@ h3 {
 														placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="password">Password: </label> <input
-														type="password" id="password" name="password"
+													<label for="registerPassword">Password: </label> <input
+														type="password" id="registerPassword" name="password"
 														placeHolder="Password" class="form-control" />
 												</div>
 												<div class="form-group">

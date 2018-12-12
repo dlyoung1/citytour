@@ -80,16 +80,14 @@ hr {
 .btn {
 	margin-top: 10px;
 }
- .grayscale { 
-	filter: grayscale(100%); 
-} 
+
 
 </style>
 
 <div class="card w-75 bg-light text-center border border-dark">
   <c:url var="imgcitygifSrc" value="/img/citygif.gif" /> 
   <div class="wrapper">
-  <img class="card-img grayscale" src="${imgcitygifSrc}" alt="Card image" style="opacity: 0.35;">
+  <img class="card-img" src="${imgcitygifSrc}" alt="Card image" style="opacity: 0.35;">
   <div class="card-img-overlay">
     <h2 class="card-title"><strong>Are you looking to maximize your time in a new city?</strong></h2><hr><br>
     <p class="card-text"><span class="highlight">Let <span style="font-family: 'Special Elite', cursive;

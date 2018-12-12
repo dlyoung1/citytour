@@ -163,7 +163,8 @@ h3 {
 										</div>
 										<!-- body -->
 										<div class="modal-header">
-											<form id="login" method="POST" action="${formAction}">
+											<c:url var="loginAction" value="/login" />
+											<form id="login" method="POST" action="${loginAction}">
 												<input type="hidden" name="destination"
 													value="${param.destination}" /> <input type="hidden"
 													name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
@@ -197,7 +198,8 @@ h3 {
 										</div>
 										<!-- body -->
 										<div class="modal-header">
-											<form id="register" method="POST" action="${formAction}">
+											<c:url var="registerAction" value="/users" />
+											<form id="register" method="POST" action="${registerAction}">
 												<input type="hidden" name="destination"
 													value="${param.destination}" /> <input type="hidden"
 													name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
@@ -207,8 +209,8 @@ h3 {
 														placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="registerPassword">Password: </label> <input
-														type="password" id="registerPassword" name="password"
+													<label for="password">Password: </label> <input
+														type="password" id="password" name="password"
 														placeHolder="Password" class="form-control" />
 												</div>
 												<div class="form-group">

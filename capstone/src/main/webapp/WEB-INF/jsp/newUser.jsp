@@ -1,8 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
 <script type="text/javascript">
+
 	$(document).ready(function () {
 		$.validator.addMethod('capitals', function(thing){
 			return thing.match(/[A-Z]/);
@@ -55,10 +56,10 @@
 				<label for="confirmPassword">Confirm Password: </label>
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
-			<button type="submit" class="btn btn-primary">Create User</button>
+			<button type="submit" class="btn btn-warning">Create User</button>
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
 </form>
 		
-<c:import url="/WEB-INF/jsp/footer.jsp" />
+<c:import url="/WEB-INF/jsp/footer.jsp" /> --%>

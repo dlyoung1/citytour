@@ -8,6 +8,9 @@ public class Place {
 	private String placeName;
 	private String description;
 	
+	public Place() {
+		this.placeId = 0;
+	}
 	public int getPlaceId() {
 		return placeId;
 	}

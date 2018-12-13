@@ -12,6 +12,8 @@
                 html += '<div><label><input type="checkbox" class="types" id="' + value + '"value="' + value + '" />' + capitalizeFirstLetter(name) + '</label></div>';
             });
             $('#type_holder').html(html);
+            
+            
         });
 
         function capitalizeFirstLetter(string) {
@@ -120,10 +122,21 @@
         function callback(results, status) {
 
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
+            		var html = '<h4>Nearby location details</h4><ul>';
+            		for (var i = 0; i < results.length; i++) {
                     createMarker(results[i], results[i].icon);
+            			html += '<li class="places" id="' + results[i].name + '" data-value="' + results[i].name + '">' + results[i].name + '</li>';
+            			html += '<div>' + results[i].vicinity + '</div>';
                 }
+            		$('#placeList').html(html + '</ul>');
             }
+            
+            var html = '<h4>Selected location details</h4><ul>';
+            $('#placeList li').click(function () {
+	    			var selectedPlace = this.dataset.value;
+	    			html += '<li id="' + selectedPlace + '">' + selectedPlace + '</li>';
+	    			$('#selected').html(html + '</ul>');
+    			});
         }
 
         function createMarker(place, icon) {
@@ -144,13 +157,17 @@
                 infowindow.open(map, this);
             });
         }
+        
+		
+        
+         
     </script>
 
-    <div style="float: right;">
-        <div id="map" style="width:900px; height:600px;"></div>
+    <div style="display:inline-block; margin:auto">
+        <div id="map" style="width:700px; height:600px;"></div>
     </div>
 
-    <div style="float: left; width: 400;">
+    <div style="float:left; width: 400;">
         <form name="frm_map" id="frm_map">
             <table>
                 <tr>
@@ -182,7 +199,18 @@
                 </tr>
             </table>
         </form>
-    </div>
+        	</div>
+        	
+        	<div style="float:left" id="placeList"></div>
+        	
+        	<div style="float:right">
+        		<form name="selected" action="POST">
+        			<div id="selected"></div>
+   				<input type="button" value="add locations">
+        		</form>
+        	</div>
+
+    
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initialize" async defer></script>
 

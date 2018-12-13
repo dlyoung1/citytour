@@ -204,10 +204,12 @@
         	<div style="float:left" id="placeList"></div>
         	
         	<div style="float:right">
-        		<form name="selected" action="POST">
+        	<c:url var="addSelection" value="/selection">
+        		<form name="selected" method="POST" action="${addSelection}">
         			<div id="selected"></div>
    				<input type="button" value="add locations">
         		</form>
+        	</c:url>
         	</div>
 
     

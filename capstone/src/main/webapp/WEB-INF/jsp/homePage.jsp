@@ -2,16 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet" type="text/css" href="/css/CityTour.css"> 
+<!-- COMMENTED OUT <link rel="stylesheet" type="text/css" href="/css/CityTour.css">  -->
     
 <c:import url="/WEB-INF/jsp/header.jsp" />
-    
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="css/CityTour.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Home Page</title>
-</head>
+
 <style>
 
 input[type=text] {
@@ -84,6 +78,22 @@ hr {
 
 </style>
 
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var place;
+		var input = document.getElementById('cityZipCode');
+		var options = {
+			types: ['(regions)']
+		}
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		google.maps.event.addListener(autocomplete, 'place_changed', function(){
+			place = autocomplete.getPlace();
+		})
+	      
+	})
+</script>
+
 <div class="card w-75 bg-light text-center border border-dark">
   <c:url var="imgcitygifSrc" value="/img/citygif.gif" /> 
   <div class="wrapper">
@@ -94,13 +104,13 @@ hr {
 					font-size: 18px; font-weight: bold">&nbsp;City Tour&nbsp;</span> help you plan the most efficient route to see as many local landmarks as possible!</span></p>
     <br>
     <form>
-		<input type="text" name="cityZipCode" placeholder="Enter City Name or Zip Code"><br>
+		<input type="text" name="cityZipCode" placeholder="Enter City Name or Zip Code" id="cityZipCode"><br>
 	</form>
 	<a href="#" class="btn btn-warning">Let's Get Started!</a>
   </div>
    </div>
 </div>
 
-</body>
-</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places" defer></script>
+
 <c:import url="/WEB-INF/jsp/footer.jsp" />

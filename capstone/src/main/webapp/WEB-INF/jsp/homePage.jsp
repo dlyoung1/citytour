@@ -126,39 +126,6 @@ include media-breakpoint-only (xl) {
    </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places" defer></script>
-
-	<c:url var="imgcitygifSrc" value="/img/citygif.gif" />
-	<div class="wrapper">
-		<img class="card-img grayscale" src="${imgcitygifSrc}"
-			alt="Card image" style="opacity: 0.8;">
-		<div class="card-img-overlay">
-			<h2 class="card-title">
-				<strong>Looking to maximize your time in a new city?</strong>
-			</h2>
-			<hr>
-			<br>
-			<p class="card-text">
-					Let <span style="font-family: 'Special Elite', cursive; font-size: 18px; font-weight: bold">&nbsp;City
-					Tour&nbsp;</span> help you plan the most efficient route to see as many
-				local landmarks as possible! 
-			</p>
-			<br>
-			<form>
-				<input type="text" name="cityZipCode"
-					placeholder="Enter City Name or Zip Code"><br>
-			</form>
-			<c:url var="searchPlacesHref" value="/searchPlaces" />
-			<a href="${searchPlacesHref}" class="btn btn-warning"
-				style="display: inline">Let's Get Started!</a>
-			<p>
-				<br>
-				<a href="#discoverMore" class="discoverMoreLink">or Discover
-					More</a>
-			</p>
-		</div>
-	</div>
-</div>
 
 <div id="discoverMore" class="card-columns">
 	<div class="card">
@@ -242,6 +209,8 @@ include media-breakpoint-only (xl) {
 		</div>
 	</div>
 </div>
-</body>
-</html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places" defer></script>
+
+
 <c:import url="/WEB-INF/jsp/footer.jsp" />

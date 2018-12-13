@@ -104,8 +104,24 @@
 h3 {
 	font-family: 'Special Elite', cursive;
 }
+.loginLinks {
+	font-size: 13.5px;
+	text-decoration: underline;
+}
+#currentUser {
+	font-family: 'Special Elite', cursive;
+	font-size: 20px;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+p span {
+	background-color: white;
+	padding: 5px;
+	border-radius: 10px;
+}
 </style>
 </head>
+
 <body
 	style="background: url(img/roadBackground3.png) no-repeat center center fixed; background-size: cover;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -130,20 +146,16 @@ h3 {
 				
 				<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
-					<li class="nav-item"><a class="nav-link" 
-						href="${dashboardHref}" style="color: black">Completed Trips</a></li>
+					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link" 
+						href="${dashboardHref}">Completed Trips</a></li>
 					<c:url var="newMessageHref"
 						value="/users/${currentUser}/messages/new" />
-					<li class="nav-item"><a class="nav-link"
-						href="${newMessageHref}" style="color: black">Upcoming Trips</a></li>
-					<c:url var="sentMessagesHref"
-						value="/users/${currentUser}/messages" />
-					<li class="nav-item"><a class="nav-link"
-						href="${sentMessagesHref}" style="color: black">Sent Messages</a></li>
+					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link"
+						href="${newMessageHref}">Upcoming Trips</a></li>
 					<c:url var="changePasswordHref"
 						value="/users/${currentUser}/changePassword" />
-					<li class="nav-item"><a class="nav-link"
-						href="${changePasswordHref}" style="color: black">Change Password</a></li>
+					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link"
+						href="${changePasswordHref}">Change Password</a></li>
 				</c:if>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -233,7 +245,7 @@ h3 {
 						<form id="logoutForm" action="${logoutAction}" method="POST">
 							<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 						</form>
-						<li class="nav-item"><a id="logoutLink" href="#" style="color: black">Log Out</a></li>
+						<li class="nav-item btn btn-warning"><a id="logoutLink" href="#" style="color: black">Log Out</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -241,5 +253,5 @@ h3 {
 	</nav>
 
 	<c:if test="${not empty currentUser}">
-		<p id="currentUser">Current User: ${currentUser}</p>
+		<p id="currentUser"><span>Welcome back, ${currentUser.userName}!</span></p>
 	</c:if>

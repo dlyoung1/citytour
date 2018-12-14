@@ -96,15 +96,37 @@ include media-breakpoint-only (xl) {
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		var place;
 		var input = document.getElementById('cityZipCode');
 		var options = {
 			types: ['(regions)']
-		}
+		};
 		var autocomplete = new google.maps.places.Autocomplete(input, options);
 		google.maps.event.addListener(autocomplete, 'place_changed', function(){
-			place = autocomplete.getPlace();
+			var place = autocomplete.getPlace();
+			$("#placeJSON").val(encodeURIComponent(JSON.stringify(place)));
 		})
+		
+/* 	$("#submitButton").on("click", function(e) {
+			var root = "http://localhost:8080/capstone/";
+			var place = autocomplete.getPlace();
+	        $.ajax({
+	            method: "POST",
+	            url: root,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            data: JSON.stringify(place),
+	            success: function (response) {
+	                if (response.d == true) {
+	                     window.location = root + "searchPlaces";
+	                 }
+	             },
+	             failure: function (response) {
+	                 alert(response.d);
+	             }
+	        })
+	        e.preventDefault();
+			return false;
+	    }) */
 	      
 	})
 </script>
@@ -118,10 +140,12 @@ include media-breakpoint-only (xl) {
     <p class="card-text"><span class="highlight">Let <span style="font-family: 'Special Elite', cursive;
 					font-size: 18px; font-weight: bold">&nbsp;City Tour&nbsp;</span> help you plan the most efficient route to see as many local landmarks as possible!</span></p>
     <br>
-    <form>
+    <c:url value="/" var="formAction"/>
+    <form method="POST" action="${formAction}">
 		<input type="text" name="cityZipCode" placeholder="Enter City Name or Zip Code" id="cityZipCode"><br>
+		<input type="hidden" value="" name="placeJSON" id="placeJSON">
+		<input type="submit" class="btn btn-warning" id="submitButton" value="Let's Get Started!">
 	</form>
-	<a href="#" class="btn btn-warning">Let's Get Started!</a>
   </div>
    </div>
 </div>

@@ -2,16 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet" type="text/css" href="/css/CityTour.css">
-
+<!-- COMMENTED OUT <link rel="stylesheet" type="text/css" href="/css/CityTour.css">  -->
+    
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="css/CityTour.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Home Page</title>
-</head>
 <style>
 input[type=text] {
 	width: 50%;
@@ -100,6 +94,44 @@ include media-breakpoint-only (xl ) {
 }
 }
 </style>
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var input = document.getElementById('cityZipCode');
+		var options = {
+			types: ['(regions)']
+		};
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		google.maps.event.addListener(autocomplete, 'place_changed', function(){
+			var place = autocomplete.getPlace();
+			$("#placeJSON").val(encodeURIComponent(JSON.stringify(place)));
+		})
+		
+/* 	$("#submitButton").on("click", function(e) {
+			var root = "http://localhost:8080/capstone/";
+			var place = autocomplete.getPlace();
+	        $.ajax({
+	            method: "POST",
+	            url: root,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            data: JSON.stringify(place),
+	            success: function (response) {
+	                if (response.d == true) {
+	                     window.location = root + "searchPlaces";
+	                 }
+	             },
+	             failure: function (response) {
+	                 alert(response.d);
+	             }
+	        })
+	        e.preventDefault();
+			return false;
+	    }) */
+	      
+	})
+</script>
 
 <div class="card w-75 bg-light text-center border border-dark">
 	<c:url var="imgcitygifSrc" value="/img/citygif.gif" />
@@ -219,6 +251,8 @@ include media-breakpoint-only (xl ) {
 		</div>
 	</div>
 </div>
-</body>
-</html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places" defer></script>
+
+
 <c:import url="/WEB-INF/jsp/footer.jsp" />

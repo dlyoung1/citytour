@@ -1,19 +1,77 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-    <script>
-        $(document).ready(function () {
+    
+	<div id="placeJSON" data-json='${place}'></div>
+    <div style="display:inline-block; margin:auto">
+        <div id="map" style="width:700px; height:600px;"></div>
+    </div>
 
-            var html = '';
-            var types = ['entertainment', 'cultural', 'night_life', 'sports', 'accomodations', 'restaurants', 'shopping', 'outdoor_recreation', 'public_transportation', 'medical_services', 'pet_care', 'other_services', 'spiritual'];
+    <div style="float:left; width: 400;">
+        <form name="frm_map" id="frm_map">
+            <table>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                        <input type="text" name="address" id="address" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Radius</th>
+                    <td>
+                        <input type="text" name="radius" id="radius" value="5">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Types</th>
+                    <td>
+                        <div id="type_holder" style="height: 250px; overflow-y: scroll;">
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Show" id="submit" onclick="renderMap();">
+                        <input type="reset" value="Reset">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        	</div>
+        	
+        	<div style="float:left" id="placeList"></div>
+        	
+        	<div style="float:right">
+        	<c:url var="addSelection" value="/selection">
+        		<form name="selected" method="POST" action="${addSelection}">
+        			<div id="selected"></div>
+   				<input type="button" value="add locations">
+        		</form>
+        	</c:url>
+        	</div>
+
+    <script>
+
+        $(document).ready(function () {
+        	
+			$("#address").val(postedPlaceJSON.formatted_address);
+			var html = '';
+			var types = ['entertainment', 'cultural', 'night_life', 'sports', 'accomodations', 'restaurants', 'shopping', 'outdoor_recreation', 'public_transportation', 'medical_services', 'pet_care', 'other_services', 'spiritual'];
 
             $.each(types, function (index, value) {
                 var name = value.replace(/_/g, " ");
                 html += '<div><label><input type="checkbox" class="types" id="' + value + '"value="' + value + '" />' + capitalizeFirstLetter(name) + '</label></div>';
             });
-            $('#type_holder').html(html);
+            $('#type_holder').html(html);  
+            
         });
-
+		
+		var postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
+		var lat = postedPlaceJSON.geometry.location.lat;
+		var lng = postedPlaceJSON.geometry.location.lng;
+		
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -28,11 +86,10 @@
             autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), {
                 types: ['(regions)'],
             });
-
-            var cinci = new google.maps.LatLng(39.1031, -84.5120);
-
+            var place = new google.maps.LatLng(this.lat, this.lng);
+            console.log(this.lng);
             map = new google.maps.Map(document.getElementById('map'), {
-                center: cinci,
+                center: place,
                 zoom: 13
             });
         }
@@ -120,10 +177,21 @@
         function callback(results, status) {
 
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
+            		var html = '<h4>Nearby location details</h4><ul>';
+            		for (var i = 0; i < results.length; i++) {
                     createMarker(results[i], results[i].icon);
+            			html += '<li class="places" id="' + results[i].name + '" data-value="' + results[i].name + '">' + results[i].name + '</li>';
+            			html += '<div>' + results[i].vicinity + '</div>';
                 }
+            		$('#placeList').html(html + '</ul>');
             }
+            
+            var html = '<h4>Selected location details</h4><ul>';
+            $('#placeList li').click(function () {
+	    			var selectedPlace = this.dataset.value;
+	    			html += '<li id="' + selectedPlace + '">' + selectedPlace + '</li>';
+	    			$('#selected').html(html + '</ul>');
+    			});
         }
 
         function createMarker(place, icon) {
@@ -144,45 +212,11 @@
                 infowindow.open(map, this);
             });
         }
+        
+		
+        
+         
     </script>
-
-    <div style="float: right;">
-        <div id="map" style="width:900px; height:600px;"></div>
-    </div>
-
-    <div style="float: left; width: 400;">
-        <form name="frm_map" id="frm_map">
-            <table>
-                <tr>
-                    <th>Address</th>
-                    <td>
-                        <input type="text" name="address" id="address" value="Cincinnati, Ohio">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Radius</th>
-                    <td>
-                        <input type="text" name="radius" id="radius" value="5">
-                    </td>
-                </tr>
-                <tr>
-                    <th>Types</th>
-                    <td>
-                        <div id="type_holder" style="height: 250px; overflow-y: scroll;">
-
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" value="Show" id="submit" onclick="renderMap();">
-                        <input type="reset" value="Reset">
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initialize" async defer></script>
 

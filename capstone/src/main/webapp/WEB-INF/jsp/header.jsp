@@ -76,10 +76,10 @@
 						$("form#login").validate({
 
 							rules : {
-								userName : {
+								loginUserName : {
 									required : true
 								},
-								password : {
+								loginPassword : {
 									required : true
 								}
 							},
@@ -181,8 +181,8 @@ p span {
 													value="${param.destination}" /> <input type="hidden"
 													name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 												<div class="form-group">
-													<label for="userName">User Name: </label> <input
-														type="text" id="userName" name="userName"
+													<label for="loginUserName">User Name: </label> <input
+														type="text" id="loginUserName" name="userName"
 														placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">

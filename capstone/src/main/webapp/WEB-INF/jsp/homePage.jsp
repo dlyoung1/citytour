@@ -79,6 +79,7 @@ hr {
 .card-img-overlay {
 	overflow: auto;
 }
+
 img {
 	opacity: 0.8;
 }
@@ -88,12 +89,13 @@ img {
 	margin-right: 60px;
 	margin-bottom: 100px;
 }
-.card-columns { @include media-breakpoint-only(lg) { column-count:4;
 
+.card-columns { @include media-breakpoint-only(lg) { column-count:4;
+	
 }
 
 @
-include media-breakpoint-only (xl) {
+include media-breakpoint-only (xl ) {
 	column-count: 5;
 }
 }
@@ -111,9 +113,10 @@ include media-breakpoint-only (xl) {
 			<hr>
 			<br>
 			<p class="card-text">
-					Let <span style="font-family: 'Special Elite', cursive; font-size: 18px; font-weight: bold">&nbsp;City
+				Let <span
+					style="font-family: 'Special Elite', cursive; font-size: 18px; font-weight: bold">&nbsp;City
 					Tour&nbsp;</span> help you plan the most efficient route to see as many
-				local landmarks as possible! 
+				local landmarks as possible!
 			</p>
 			<br>
 			<form>
@@ -124,14 +127,16 @@ include media-breakpoint-only (xl) {
 			<a href="${searchPlacesHref}" class="btn btn-warning"
 				style="display: inline">Let's Get Started!</a>
 			<p>
-				<br>
-				<a href="#discoverMore" class="discoverMoreLink">or Discover
-					More</a>
+				<br> <a href="#discoverMore" class="discoverMoreLink">or
+					Discover More</a>
 			</p>
 		</div>
 	</div>
 </div>
-
+<%-- <div class="arrow">
+	<c:url var="arrowDashes" value="/img/dashes .jpg"/>
+	<img src="${arrowDashes}" alt="arrow img">
+</div>	 --%>
 <div id="discoverMore" class="card-columns">
 	<div class="card">
 		<c:url var="keyWestImg" value="/img/keywest.jpg" />

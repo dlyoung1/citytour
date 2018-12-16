@@ -92,7 +92,7 @@ img {
 include media-breakpoint-only (xl ) {
 	column-count: 5;
 }
-}
+
 </style>
 
 
@@ -108,7 +108,7 @@ include media-breakpoint-only (xl ) {
 			$("#placeJSON").val(encodeURIComponent(JSON.stringify(place)));
 		})
 		
-/* 	$("#submitButton").on("click", function(e) {
+ 	$("#submitButton").on("click", function(e) {
 			var root = "http://localhost:8080/capstone/";
 			var place = autocomplete.getPlace();
 	        $.ajax({
@@ -128,7 +128,7 @@ include media-breakpoint-only (xl ) {
 	        })
 	        e.preventDefault();
 			return false;
-	    }) */
+	    }) 
 	      
 	})
 </script>
@@ -165,10 +165,10 @@ include media-breakpoint-only (xl ) {
 		</div>
 	</div>
 </div>
-<%-- <div class="arrow">
-	<c:url var="arrowDashes" value="/img/dashes .jpg"/>
+<div class="arrow">
+	<c:url var="arrowDashes" value="/img/arrow-line.png"/>
 	<img src="${arrowDashes}" alt="arrow img">
-</div>	 --%>
+</div>
 <div id="discoverMore" class="card-columns">
 	<div class="card">
 		<c:url var="keyWestImg" value="/img/keywest.jpg" />

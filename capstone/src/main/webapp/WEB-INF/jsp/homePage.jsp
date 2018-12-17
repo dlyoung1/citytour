@@ -10,7 +10,6 @@ input[type=text] {
 	padding: 12px 10px;
 	box-sizing: border-box;
 }
-
 .card {
 	margin: 0 auto;
 	margin-top: 40px;
@@ -176,8 +175,9 @@ img {
 					placeholder="Enter City Name or Zip Code" id="cityZipCode"><br>
 				<input type="hidden" value="" name="placeJSON" id="placeJSON">
 				<input type="submit" class="btn btn-warning" id="submitButton"
-					value="Let's Get Started!">
+					value="Let's Get Started!" style="margin-bottom: 5px">
 			</form>
+			<a href="#discoverMore" style="color: white">or Discover More!</a>
 		</div>
 	</div>
 </div>
@@ -186,7 +186,7 @@ img {
 	<img src="${arrow}" alt="dashed arrow"
 		class="moveImg rotate center" style="opacity:1.0" height="300">
 </div>
-<div class="card-columns">
+<div id="discoverMore" class="card-columns">
 	<div class="card">
 		<c:url var="keyWestImg" value="/img/keywest.jpg" />
 		<img class="card-img-top" src="${keyWestImg}" alt="Card image cap">

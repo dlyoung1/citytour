@@ -16,8 +16,7 @@
 
 <link rel="stylesheet" type="text/css" href="${bootstrapCss}">
 <link rel="stylesheet" type="text/css" href="${siteCss}">
-<link href="https://fonts.googleapis.com/css?family=Special+Elite"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
 
 <script src="${jQueryJs}"></script>
 <script src="${jqValidateJs}"></script>
@@ -27,144 +26,131 @@
 <script src="${bootstrapJs}"></script>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("time.timeago").timeago();
+	$(document).ready(function () {
+		$("time.timeago").timeago();
+		$("#logoutLink").click(function (event) {
+			$("#logoutForm").submit();
+		});
+		var pathname = window.location.pathname;
+		$("nav a[href='" + pathname + "']").parent().addClass("active");
 
-						$("#logoutLink").click(function(event) {
-							$("#logoutForm").submit();
-						});
-
-						var pathname = window.location.pathname;
-						$("nav a[href='" + pathname + "']").parent().addClass(
-								"active");
-
-						$.validator.addMethod('capitals', function(thing) {
-							return thing.match(/[A-Z]/);
-						});
-						$("form#register")
-								.validate(
-										{
-
-											rules : {
-												userName : {
-													required : true
-												},
-												password : {
-													required : true,
-													minlength : 15,
-													capitals : true,
-												},
-												confirmPassword : {
-													required : true,
-													equalTo : "#password"
-												}
-											},
-											messages : {
-												password : {
-													minlength : "Password too short, make it at least 15 characters",
-													capitals : "Field must contain a capital letter",
-												},
-												confirmPassword : {
-													equalTo : "Passwords do not match"
-												}
-											},
-											errorClass : "error"
-										});
-
-						$("form#login").validate({
-
-							rules : {
-								loginUserName : {
-									required : true
-								},
-								loginPassword : {
-									required : true
-								}
-							},
-							messages : {
-								confirmPassword : {
-									equalTo : "Passwords do not match"
-								}
-							},
-							errorClass : "error"
-						});
-					});
+		$.validator.addMethod('capitals', function (thing) {
+			return thing.match(/[A-Z]/);
+		});
+		$("form#register").validate({
+			rules: {
+				userName: {
+					required: true
+				},
+				password: {
+					required: true,
+					minlength: 15,
+					capitals: true,
+				},
+				confirmPassword: {
+					required: true,
+					equalTo: "#password"
+				}
+			},
+			messages: {
+				password: {
+					minlength: "Password too short, make it at least 15 characters",
+					capitals: "Field must contain a capital letter",
+				},
+				confirmPassword: {
+					equalTo: "Passwords do not match"
+				}
+			},
+			errorClass: "error"
+		});
+		$("form#login").validate({
+			rules: {
+				loginUserName: {
+					required: true
+				},
+				loginPassword: {
+					required: true
+				}
+			},
+			messages: {
+				confirmPassword: {
+					equalTo: "Passwords do not match"
+				}
+			},
+			errorClass: "error"
+		});
+	});
 </script>
 <style>
-.modal-dialog {
-	width: 350px;
-}
+	.modal-dialog {
+		width: 350px;
+	}
 
-.form-group {
-	width: 100%;
-}
+	.form-group {
+		width: 100%;
+	}
 
-h3 {
-	font-family: 'Special Elite', cursive;
-}
-.loginLinks {
-	font-size: 13.5px;
-	text-decoration: underline;
-}
-#currentUser {
-	font-family: 'Special Elite', cursive;
-	font-size: 20px;
-	margin-left: 50px;
-	margin-top: 50px;
-}
-p span {
-	background-color: white;
-	padding: 5px;
-	border-radius: 10px;
-}
+	h3 {
+		font-family: 'Special Elite', cursive;
+	}
+
+	.loginLinks {
+		font-size: 13.5px;
+		text-decoration: underline;
+	}
+
+	#currentUser {
+		font-family: 'Special Elite', cursive;
+		font-size: 20px;
+		margin-left: 50px;
+		margin-top: 50px;
+	}
+
+	p span {
+		background-color: white;
+		padding: 5px;
+		border-radius: 10px;
+	}
 </style>
 </head>
 
-<body
-	style="background: url(img/roadBackground3.png) no-repeat center center fixed; background-size: cover;">
+<body style="background: url(img/roadBackground3.png) no-repeat center center fixed; background-size: cover;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
-		<a class="navbar-brand" href="#"> <c:url var="homePageHref"
-				value="/" /> <c:url var="imgSrc" value="/img/marker3.png" /><a
-			href="${homePageHref}"><img src="${imgSrc}" class="img-fluid"
-				style="height: 38px;" /></a>
+		<c:url var="homePageHref" value="/" />
+		<a class="navbar-brand" href="${homePageHref}">
+			<c:url var="imgSrc" value="/img/marker3.png" />
+			<img src="${imgSrc}" class="img-fluid" style="height: 38px;" />
 		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<c:url var="homePageHref" value="/" />
-				<li class="nav-item"><a class="nav-link" href="${homePageHref}"
-					style="font-family: 'Special Elite', cursive; font-size: 28px; color: rgb(255, 195, 0); font-weight: bold">City
-						Tour</a></li>
-				
+				<li class="nav-item">
+					<a class="nav-link" href="${homePageHref}" style="font-family: 'Special Elite', cursive; font-size: 28px; color: rgb(255, 195, 0); font-weight: bold">City Tour</a>
+				</li>
 				<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
-					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link" 
-						href="${dashboardHref}">Completed Trips</a></li>
-					<c:url var="newMessageHref"
-						value="/users/${currentUser}/messages/new" />
-					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link"
-						href="${newMessageHref}">Upcoming Trips</a></li>
-					<c:url var="changePasswordHref"
-						value="/users/${currentUser}/changePassword" />
-					<li class="nav-item loginLinks d-flex align-items-center"><a class="nav-link"
-						href="${changePasswordHref}">Change Password</a></li>
+					<li class="nav-item loginLinks d-flex align-items-center">
+						<a class="nav-link" href="${dashboardHref}">Completed Trips</a>
+					</li>
+					<c:url var="newMessageHref" value="/users/${currentUser}/messages/new" />
+					<li class="nav-item loginLinks d-flex align-items-center">
+						<a class="nav-link" href="${newMessageHref}">Upcoming Trips</a>
+					</li>
+					<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
+					<li class="nav-item loginLinks d-flex align-items-center">
+						<a class="nav-link" href="${changePasswordHref}">Change Password</a>
+					</li>
 				</c:if>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:choose>
 					<c:when test="${empty currentUser}">
 						<div class="container">
-							<button type="button" class="btn btn-link nav-item"
-								data-toggle="modal" data-target="#popUpWindow"
-								style="color: black">Log In</button>
+							<button type="button" class="btn btn-link nav-item" data-toggle="modal" data-target="#popUpWindow" style="color: black">Log In</button>
 							<div class="modal fade" id="popUpWindow">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -177,18 +163,15 @@ p span {
 										<div class="modal-header">
 											<c:url var="loginAction" value="/login" />
 											<form id="login" method="POST" action="${loginAction}">
-												<input type="hidden" name="destination"
-													value="${param.destination}" /> <input type="hidden"
-													name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+												<input type="hidden" name="destination" value="${param.destination}" /> 
+												<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 												<div class="form-group">
-													<label for="loginUserName">User Name: </label> <input
-														type="text" id="loginUserName" name="userName"
-														placeHolder="User Name" class="form-control" />
+													<label for="loginUserName">User Name: </label> 
+													<input type="text" id="loginUserName" name="userName" placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="loginPassword">Password: </label> <input
-														type="password" id="loginPassword" name="password"
-														placeHolder="Password" class="form-control" />
+													<label for="loginPassword">Password: </label> 
+													<input type="password" id="loginPassword" name="password" placeHolder="Password" class="form-control" />
 												</div>
 												<button type="submit" class="btn btn-warning">Login</button>
 											</form>
@@ -198,8 +181,7 @@ p span {
 							</div>
 						</div>
 						<div class="container">
-							<button type="button" class="btn btn-warning nav-item"
-								data-toggle="modal" data-target="#popUpWindow2">Sign Up</button>
+							<button type="button" class="btn btn-warning nav-item" data-toggle="modal" data-target="#popUpWindow2">Sign Up</button>
 							<div class="modal fade" id="popUpWindow2">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -212,27 +194,21 @@ p span {
 										<div class="modal-header">
 											<c:url var="registerAction" value="/users" />
 											<form id="register" method="POST" action="${registerAction}">
-												<input type="hidden" name="destination"
-													value="${param.destination}" /> <input type="hidden"
-													name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+												<input type="hidden" name="destination" value="${param.destination}" />
+												<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 												<div class="form-group">
-													<label for="userName">User Name: </label> <input
-														type="text" id="userName" name="userName"
-														placeHolder="User Name" class="form-control" />
+													<label for="userName">User Name: </label>
+													<input type="text" id="userName" name="userName" placeHolder="User Name" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="password">Password: </label> <input
-														type="password" id="password" name="password"
-														placeHolder="Password" class="form-control" />
+													<label for="password">Password: </label>
+													<input type="password" id="password" name="password" placeHolder="Password" class="form-control" />
 												</div>
 												<div class="form-group">
-													<label for="confirmPassword">Confirm Password: </label> <input
-														type="password" id="confirmPassword"
-														name="confirmPassword" placeHolder="Re-Type Password"
-														class="form-control" />
+													<label for="confirmPassword">Confirm Password: </label>
+													<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />
 												</div>
-												<button type="submit" class="btn btn-warning">Create
-													User</button>
+												<button type="submit" class="btn btn-warning">Create User</button>
 											</form>
 										</div>
 									</div>

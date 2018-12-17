@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-    
+
 	<div id="placeJSON" data-json='${place}'></div>
     <div style="display:inline-block; margin:auto">
         <div id="map" style="width:700px; height:600px;"></div>
@@ -53,7 +53,6 @@
         	</div>
 
     <script>
-
         $(document).ready(function () {
         	
 			$("#address").val(postedPlaceJSON.formatted_address);
@@ -213,9 +212,6 @@
             });
         }
         
-		
-        
-         
     </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initialize" async defer></script>

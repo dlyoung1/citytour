@@ -177,7 +177,7 @@ img {
 				<input type="submit" class="btn btn-warning" id="submitButton"
 					value="Let's Get Started!" style="margin-bottom: 5px">
 			</form>
-			<a href="#discoverMore" style="color: white">or Discover More!</a>
+			<a href="#discoverMore" style="color: white">or Discover More</a>
 		</div>
 	</div>
 </div>

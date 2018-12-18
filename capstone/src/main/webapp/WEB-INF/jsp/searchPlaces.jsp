@@ -3,30 +3,38 @@
 
 <style>
 .container#mapPage {
-	margin: 0 auto;
 	margin-top: 30px;
 	padding-bottom: 20px;
+}
+
+.categoriesCard {
+	margin-bottom: 15px;
+	margin-left: 15px;
 }
 </style>
 
 <div id="placeJSON" data-json='${place}'></div>
 
 <div id="mapPage" class="container">
-	<div class="col-md-6 col-sm-6" style="display: inline-block;">
-		<div id="map" style="width: 800px; height: 500px;"></div>
-	</div>
 
-	<div style="float: left;">
+	<div class="categoriesCard" style="float: left;">
 		<form name="frm_map" id="frm_map">
 
+		<div class="container">
 			<div class="card text-center bg-light"
-				style="width: 20rem; height: 500px">
+				style="width: 20rem; height: 100%">
 				<div class="card-body">
+					<input type="hidden" name="address" id="address" value="">
+					
+					<h5 class="card-title text-left"><span
+							style="font-family: 'Special Elite', cursive; font-size: 24px">Radius:</span>
+					<input type="text" name="radius" id="radius" value="" placeholder="...in miles">
+					</h5>
 					<h5 class="card-title text-left">
 						<span
 							style="font-family: 'Special Elite', cursive; font-size: 24px">Categories:</span>
 					</h5>
-					<div id="type_holder" style="height: 380px; overflow-y: scroll;">
+					<div id="type_holder" style="height: 380px; overflow-y: scroll">
 					</div>
 					<div class="typeButtons">
 						<input type="button" class="btn btn-warning" value="Show"
@@ -35,10 +43,16 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</form>
 	</div>
 
+	<div class="col-md-8" style="display: inline-block;">
+		<div id="map" style="width: 100%; height: 555px;"></div>
+	</div>
+
 	<div style="float: left" id="placeList"></div>
+
 
 	<div style="float: right">
 		<c:url var="addSelection" value="/selection">
@@ -49,8 +63,6 @@
 		</c:url>
 	</div>
 </div>
-
-
 
 <script>
 	$(document)

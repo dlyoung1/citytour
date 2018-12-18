@@ -111,10 +111,14 @@
 		padding: 5px;
 		border-radius: 10px;
 	}
+	body {
+		background: url(img/roadBackground3.png) no-repeat center center fixed;
+		background-size: cover;
+	}
 </style>
 </head>
 
-<body style="background: url(img/roadBackground3.png) no-repeat center center fixed; background-size: cover;">
+<body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<c:url var="homePageHref" value="/" />
 		<a class="navbar-brand" href="${homePageHref}">

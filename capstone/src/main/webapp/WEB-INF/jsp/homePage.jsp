@@ -10,6 +10,7 @@ input[type=text] {
 	padding: 12px 10px;
 	box-sizing: border-box;
 }
+
 .card {
 	margin: 0 auto;
 	margin-top: 40px;
@@ -17,6 +18,10 @@ input[type=text] {
 	margin-bottom: 50px;
 	word-wrap: break-word;
 	max-width: 700px;
+}
+
+.container {
+	margin-bottom: 40px;
 }
 
 h2 {
@@ -80,16 +85,13 @@ hr {
 	overflow: auto;
 }
 
-img {
-	opacity: 0.8;
-}
-
 .card-columns {
 	margin-top: 10px;
 	margin-left: 60px;
 	margin-right: 60px;
 	margin-bottom: 100px;
 }
+
 .rotate {
 	-webkit-transform: rotate(-50deg);
 	-moz-transform: rotate(-50deg);
@@ -97,16 +99,16 @@ img {
 	-o-transform: rotate(-50deg);
 	transform: rotate(-50deg);
 }
+
 .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .card-columns { @include media-breakpoint-only(lg) { column-count:4;
 	
 }
-
 </style>
 
 
@@ -154,8 +156,7 @@ img {
 <div class="card w-75 bg-light text-center border border-dark">
 	<c:url var="imgcitygifSrc" value="/img/citygif.gif" />
 	<div class="wrapper">
-		<img class="card-img" src="${imgcitygifSrc}" alt="Card image"
-			style="opacity: 0.8;">
+		<img class="card-img" src="${imgcitygifSrc}" alt="Card image">
 		<div class="card-img-overlay">
 			<h2 class="card-title">Are you looking to maximize your time in
 				a new city?</h2>
@@ -183,8 +184,8 @@ img {
 </div>
 <div class="container">
 	<c:url var="arrow" value="/img/curlyarrow.png" />
-	<img src="${arrow}" alt="dashed arrow"
-		class="moveImg rotate center" style="opacity:1.0" height="300">
+	<img src="${arrow}" alt="curly arrow" class="moveImg rotate center"
+		height="300">
 </div>
 <div id="discoverMore" class="card-columns">
 	<div class="card">
@@ -253,8 +254,8 @@ img {
 				one of the best beer scenes in America?</span>
 			<p class="card-text">
 				<span style="font-family: 'Special Elite', cursive;">Asheville,
-					North Carolina</span>has got you covered! With over 60 breweries, no wonder it has been voted best beer city
-				4 years in a row.
+					North Carolina</span>has got you covered! With over 60 breweries, no
+				wonder it has been voted best beer city 4 years in a row.
 			</p>
 		</div>
 	</div>

@@ -141,9 +141,6 @@
 						<a class="nav-link" href="${newMessageHref}">Upcoming Trips</a>
 					</li>
 					<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
-					<li class="nav-item loginLinks d-flex align-items-center">
-						<a class="nav-link" href="${changePasswordHref}">Change Password</a>
-					</li>
 				</c:if>
 			</ul>
 			<ul class="navbar-nav ml-auto">

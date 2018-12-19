@@ -24,4 +24,10 @@ public class HomePageController {
 	public String searchPlaces() {
 		return "searchPlaces";
 	}
+	
+	@RequestMapping(value="/route", method=RequestMethod.POST)
+	public String displayRoute(@RequestParam String selectedPlaces, ModelMap map) {
+		map.put("places", selectedPlaces);
+		return "route";
+	}
 }

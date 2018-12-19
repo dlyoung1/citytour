@@ -28,7 +28,7 @@ public class Testing {
 		newTrip.setTripCity("West Chester");
 		newTrip.setTripCountry("USA");
 		newTrip.setTripFormattedAddress("West Chester Township, OH 45069, USA");
-		newTrip.setTripName("My Second Trip!");
+		newTrip.setTripName("My Third Trip!");
 		newTrip.setUserId(1);
 		
 		Place place1 = new Place();

@@ -142,13 +142,9 @@
 					<a class="nav-link" href="${homePageHref}" style="font-family: 'Special Elite', cursive; font-size: 28px; color: rgb(255, 195, 0); font-weight: bold">City Tour</a>
 				</li>
 				<c:if test="${not empty currentUser}">
-					<c:url var="dashboardHref" value="/users/${currentUser}" />
+					<c:url var="dashboardHref" value="/userDashboard" />
 					<li class="nav-item loginLinks d-flex align-items-center">
-						<a class="nav-link" href="${dashboardHref}">Completed Trips</a>
-					</li>
-					<c:url var="newMessageHref" value="/users/${currentUser}/messages/new" />
-					<li class="nav-item loginLinks d-flex align-items-center">
-						<a class="nav-link" href="${newMessageHref}">Upcoming Trips</a>
+						<a class="nav-link" href="${dashboardHref}">My Saved Trips</a>
 					</li>
 					<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
 				</c:if>

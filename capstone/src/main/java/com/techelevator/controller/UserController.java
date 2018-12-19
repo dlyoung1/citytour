@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.techelevator.model.TripDAO;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
@@ -18,10 +21,12 @@ import com.techelevator.model.UserDAO;
 public class UserController {
 
 	private UserDAO userDAO;
+	private TripDAO tripDAO;
 
 	@Autowired
-	public UserController(UserDAO userDAO) {
+	public UserController(UserDAO userDAO, TripDAO tripDAO) {
 		this.userDAO = userDAO;
+		this.tripDAO = tripDAO;
 	}
 
 	@RequestMapping(path="/users/new", method=RequestMethod.GET)
@@ -42,6 +47,13 @@ public class UserController {
 		
 		userDAO.saveUser(user.getUserName(), user.getPassword());
 		return "redirect:/login";
+	}
+	
+	@RequestMapping(path="/users/{userName}", method=RequestMethod.GET)
+	public String displayUserDashboard(@PathVariable String userName, ModelMap map) {
+		Integer userId = userDAO.getUserIdByUserName(userName);
+		map.addAttribute("tripList", tripDAO.getAllTripsForUser(userId));
+		return "userDashboard";
 	}
 	
 	

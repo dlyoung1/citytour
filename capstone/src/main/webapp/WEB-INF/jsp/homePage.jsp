@@ -129,27 +129,12 @@ hr {
 									encodeURIComponent(JSON.stringify(place)));
 						})
 
-				/* 	$("#submitButton").on("click", function(e) {
-				 var root = "http://localhost:8080/capstone/";
-				 var place = autocomplete.getPlace();
-				 $.ajax({
-				 method: "POST",
-				 url: root,
-				 contentType: "application/json; charset=utf-8",
-				 dataType: "json",
-				 data: JSON.stringify(place),
-				 success: function (response) {
-				 if (response.d == true) {
-				 window.location = root + "searchPlaces";
-				 }
-				 },
-				 failure: function (response) {
-				 alert(response.d);
-				 }
-				 })
-				 e.preventDefault();
-				 return false;
-				 }) */
+						$('#cityZipCode').keydown(function (e) {
+				  			if (e.which == 13 && $('.pac-container:visible').length) {
+				  				e.preventDefault();
+				  				$("#cityForm").submit();
+				  			}
+						});
 
 			})
 </script>

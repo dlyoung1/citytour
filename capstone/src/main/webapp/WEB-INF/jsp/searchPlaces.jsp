@@ -51,17 +51,17 @@
 		<div id="map" style="width: 100%; height: 555px;"></div>
 	</div>
 
-	<div style="float: left" id="placeList"></div>
+	<div style="float:left; background-color:white" id="placeList"></div>
 
-
-	<div style="float: right">
-		<c:url var="addSelection" value="/selection">
-			<form name="selected" method="POST" action="${addSelection}">
-				<div id="selected"></div>
-				<input type="button" value="add locations">
-			</form>
-		</c:url>
-	</div>
+	
+	
+	<div style="float:left; background-color:white">
+        	<c:url var="addSelection" value="/route"/>
+        		<form name="selected" method="POST" action="${addSelection}">
+        			<div id="selected"></div>
+   				<input type="submit" value="add locations">
+        		</form>
+    </div>
 </div>
 
     <script>
@@ -204,6 +204,7 @@
             $('#placeList li').click(function () {
 	    			var selectedPlace = this.dataset.value;
 	    			html += '<li id="' + selectedPlace + '">' + selectedPlace + '</li>';
+	    			html += '<input type="hidden" value="' + selectedPlace + '" name="selectedPlaces">';
 	    			$('#selected').html(html + '</ul>');
     			});
         }

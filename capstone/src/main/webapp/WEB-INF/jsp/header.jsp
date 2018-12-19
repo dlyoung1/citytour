@@ -112,9 +112,15 @@
 		border-radius: 10px;
 	}
 	body {
-		background: url(img/roadBackground3.png) no-repeat center center fixed;
+		background-image: url(img/roadBackground3.png), url(img/2.jpg); 
+		background-position: absolute, absolute;
+		background-repeat: no-repeat, no-repeat ;
 		background-size: cover;
+		background-attachment: fixed, fixed;
+		z-index: 1, 0;
+		opacity: 1
 	}
+
 </style>
 </head>
 

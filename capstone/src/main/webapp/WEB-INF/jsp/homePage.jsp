@@ -10,7 +10,10 @@ input[type=text] {
 	padding: 12px 10px;
 	box-sizing: border-box;
 }
-
+#homePageCard {
+	background-color: rgb(25, 25, 25);
+	opacity: 0.8;
+}
 .card {
 	margin: 0 auto;
 	margin-top: 40px;
@@ -84,7 +87,6 @@ hr {
 .card-img-overlay {
 	overflow: auto;
 }
-
 .card-columns {
 	margin-top: 10px;
 	margin-left: 60px;
@@ -99,7 +101,6 @@ hr {
 	-o-transform: rotate(-50deg);
 	transform: rotate(-50deg);
 }
-
 .center {
 	display: block;
 	margin-left: auto;
@@ -153,12 +154,12 @@ hr {
 			})
 </script>
 
-<div class="card w-75 bg-light text-center border border-dark">
+<div id="homePageCard" class="card w-75 text-center border border-dark">
 	<c:url var="imgcitygifSrc" value="/img/citygif.gif" />
 	<div class="wrapper">
-		<img class="card-img" src="${imgcitygifSrc}" alt="Card image">
+		<%-- <img class="card-img grayscale" src="${imgcitygifSrc}" alt="Card image"> --%>
 		<div class="card-img-overlay">
-			<h2 class="card-title">Are you looking to maximize your time in
+			<h2 class="card-title" style="color:white">Are you looking to maximize your time in
 				a new city?</h2>
 			<hr>
 			<br>
@@ -230,7 +231,7 @@ hr {
 		<img class="card-img-top" src="${lasVegasImg}" alt="Card image cap">
 		<div class="card-body">
 			<h5 class="card-title">Vegas is Calling Your Name!</h5>
-			<p class="card-text">The Las Vegas Strip offering 4.2 miles worth
+			<p class="card-text">With the Las Vegas Strip offering more than 4 miles worth
 				of fun, why would you not answer?!?</p>
 		</div>
 	</div>

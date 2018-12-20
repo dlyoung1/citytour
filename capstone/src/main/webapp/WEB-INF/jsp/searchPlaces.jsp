@@ -27,10 +27,11 @@ div.container {
 </c:if>
 
 <c:if test="${not empty savedTrip}">
-	<div id="savedTrip" data-present="true"></div>
+	<div id="savedTrip" data-present="true">
 	<div id="savedTripFormattedAddress" data-data="${savedTrip.tripFormattedAddress}"></div>
 	<div id="savedTripLat" data-data="${savedTrip.tripLatitude}"></div>
 	<div id="savedTripLng" data-data="${savedTrip.tripLongitude}"></div>
+	</div>
 </c:if>
 
 <div class="container">
@@ -131,7 +132,7 @@ div.container {
 
 		if($("#placeJSON").length != 0) {
 			postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
-			placeAddress = `postedPlaceJSON.formatted_address`;
+			placeAddress = postedPlaceJSON.formatted_address;
 			lat = postedPlaceJSON.geometry.location.lat;
 			lng = postedPlaceJSON.geometry.location.lng;
 		} else if($("#savedTrip").length != 0) {

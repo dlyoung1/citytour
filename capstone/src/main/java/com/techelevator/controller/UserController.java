@@ -53,9 +53,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/edit", method=RequestMethod.POST)
-	public String editUserTrip(@RequestParam int tripId, RedirectAttributes flash) {
-		flash.addFlashAttribute("savedTrip", tripDAO.getTripByTripId(tripId));
-		return "redirect:/searchPlaces";
+	public String routeUserTrip(@RequestParam int tripId, RedirectAttributes flash) {
+		flash.addFlashAttribute("savedTripJSON", tripDAO.getTripByTripId(tripId).getTripJson());
+		return "redirect:/route";
 	}
 	
 }

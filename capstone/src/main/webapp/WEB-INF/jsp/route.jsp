@@ -60,7 +60,13 @@
         }
     </script>
     
-    <input type="hidden" id="places" data-json="${places}"/>
+<c:if test="${not empty newTripJSON}">
+    <input type="hidden" id="places" data-json="${newTripJSON}"/>
+</c:if>
+
+<c:if test="${not empty savedTripJSON}">
+    <input type="hidden" id="places" data-json="${savedTripJSON}"/>
+</c:if>
 	
 
     <div id = "map" style="width:500px; height:500px; display:inline-block; vertical-align:top"></div>

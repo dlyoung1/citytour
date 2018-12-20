@@ -11,21 +11,32 @@
         	  });
         	  directionsDisplay.setMap(map);
         	  var waypts = [];
-        	  var places = document.getElementById('places').value;
+        	  var origin;
+        	  var destination;
+        	  var places = $('#places').attr('data-json');
         	  var placesArray = places.split(",");
-        	  for (var i = 1; i < placesArray.length - 1; i++) {
-        	      waypts.push({
-        	        location: placesArray[i],
-        	        stopover: true
-        	      });
+        	  for (var i = 0; i < placesArray.length; i++) {
+        		  let info = JSON.parse(decodeURIComponent(placesArray[i]));
+        		  console.log("info: " + info.geometry.location.lng);
+        		  if(i == 0) {
+        			  origin = info;
+        		  } else if(i == placesArray.length - 1) {
+        			  destination = info;
+        		  } else {
+	        	      waypts.push({
+	        	        location: info.vicinity,
+	        	        stopover: true
+	        	      });
+        		  }
         	    }
+        	  console.log("origin(lat): " + origin.geometry.location.lat + " origin(lng): " + origin.geometry.location.lng);
+    		  console.log("destination(lat): " + destination.geometry.location.lat + " destination(lng): " + destination.geometry.location.lng);
+    		  console.log("waypts: " + waypts);
 
         	  directionsService.route({
-        		origin: {lat: 38, lng: -84},
-        		destination: {lat: 49, lng: -86},
-        	    /* origin: waypts[0],
-        	    destination: waypts[waypts.length - 1], */
-        	    waypoints: [{lat: 38, lng: -84}, {lat: 38, lng: -84}],
+        	    origin: origin.vicinity,
+        	    destination: destination.vicinity,
+        	    waypoints: waypts,
         	    optimizeWaypoints: true,
         	    travelMode: 'DRIVING'
         	  }, function(response, status) {
@@ -50,7 +61,7 @@
         }
     </script>
     
-    <input type="hidden" id="places" value="${places}"/>
+    <input type="hidden" id="places" data-json="${places}"/>
     
     <div id = "mode-selector" class = "controls">
         <input type = "radio" name = "type" id = "changemode-walking" checked = "checked">

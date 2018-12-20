@@ -194,8 +194,9 @@
             			console.log("results[" + i + "]: ", results[i]);
             			
                     createMarker(results[i], results[i].icon);
-            			html += '<li class="places" id="' + results[i].name + '" data-value="' + results[i].name + '">' + results[i].name + '</li>';
+            			html += '<li class="places" id="' + results[i].name + '" data-value="' + encodeURIComponent(JSON.stringify(results[i])) + '">' + results[i].name + '</li>';
             			html += '<div>' + results[i].vicinity + '</div>';
+            			
                 }
             		$('#placeList').html(html + '</ul>');
             }
@@ -203,8 +204,9 @@
             var html = '<h4>Selected location details</h4><ul>';
             $('#placeList li').click(function () {
 	    			var selectedPlace = this.dataset.value;
-	    			html += '<li id="' + selectedPlace + '">' + selectedPlace + '</li>';
-	    			html += '<input type="hidden" value="' + selectedPlace + '" name="selectedPlaces">';
+	    			selectedPlace = JSON.parse(decodeURIComponent(selectedPlace));
+	    			html += '<li id="' + selectedPlace.name + '">' + selectedPlace.name + '</li>';
+	    			html += '<input type="hidden" value="' + encodeURIComponent(JSON.stringify(selectedPlace)) + '" name="selectedPlaces">';
 	    			$('#selected').html(html + '</ul>');
     			});
         }

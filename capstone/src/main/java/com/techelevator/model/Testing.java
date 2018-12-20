@@ -25,10 +25,12 @@ public class Testing {
 		newTrip.setLastEditDate(LocalDateTime.now());
 		newTrip.setCreateDate(LocalDateTime.now());
 		newTrip.setTripCityZipCode(45069);
+		//newTrip.setTripLatitude(tripLatitude);
+		//newTrip.setTripLongitude(tripLongitude);
 		newTrip.setTripCity("West Chester");
 		newTrip.setTripCountry("USA");
 		newTrip.setTripFormattedAddress("West Chester Township, OH 45069, USA");
-		newTrip.setTripName("My Third Trip!");
+		newTrip.setTripName("My First Trip!");
 		newTrip.setUserId(1);
 		
 		Place place1 = new Place();

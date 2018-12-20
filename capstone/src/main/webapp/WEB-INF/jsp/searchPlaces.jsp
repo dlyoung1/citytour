@@ -67,7 +67,7 @@
     <script>
         $(document).ready(function () {
         	
-			$("#address").val(postedPlaceJSON.formatted_address);
+			$("#address").val(startingPlace);
 			var html = '';
 			var types = ['entertainment', 'cultural', 'night_life', 'sports', 'accomodations', 'restaurants', 'shopping', 'outdoor_recreation', 'public_transportation', 'medical_services', 'pet_care', 'other_services', 'spiritual'];
 
@@ -78,10 +78,11 @@
             $('#type_holder').html(html);  
             
         });
-		
-		var postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
-		var lat = postedPlaceJSON.geometry.location.lat;
-		var lng = postedPlaceJSON.geometry.location.lng;
+        
+		var startingJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
+		var startingPlace = startingJSON.formatted_address;
+		var lat = startingJSON.geometry.location.lat;
+		var lng = startingJSON.geometry.location.lng;
 		
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -98,7 +99,6 @@
                 types: ['(regions)'],
             });
             var place = new google.maps.LatLng(this.lat, this.lng);
-            console.log(this.lng);
             map = new google.maps.Map(document.getElementById('map'), {
                 center: place,
                 zoom: 13

@@ -38,16 +38,22 @@ public class HomePageController {
 		return "searchPlaces";
 	}
 	
+	@RequestMapping(value="/route", method=RequestMethod.GET)
+	public String displaySavedRoute() {
+		return "route";
+	}
+	
 	@RequestMapping(value="/route", method=RequestMethod.POST)
-	public String displayRoute(@RequestParam String selectedPlaces, ModelMap map) {
+	public String displayNewRoute(@RequestParam String selectedPlaces, ModelMap map) {
 		Trip trip = new Trip(LocalDateTime.now(), LocalDateTime.now());
+		trip.setUserId(1);
 		trip.setTripJson(selectedPlaces);
 		trip.setUserId(1);
 		trip.setTripFormattedAddress("Cincinnati, OH, USA");
 		trip.setTripLatitude(39.1031182);
 		trip.setTripLongitude(-84.51201960000003);
 		tripDAO.saveNewTrip(trip);
-		map.put("places", selectedPlaces);
+		map.put("newTripJSON", selectedPlaces);
 		return "route";
 	}
 }

@@ -53,14 +53,21 @@ public class HomePageController {
 	public String displayNewRoute(@RequestParam String selectedPlaces, @RequestParam String tripName, @RequestParam String startingCity, @RequestParam double startingLat, @RequestParam double startingLng, ModelMap map, HttpSession session) {
 		Trip trip = new Trip(LocalDateTime.now(), LocalDateTime.now());
 		User currentUser = (User)session.getAttribute("currentUser");
-		trip.setUserId(userDAO.getUserIdByUserName(currentUser.getUserName()));
-		trip.setTripName(tripName);
-		trip.setTripJson(selectedPlaces);
-		trip.setTripFormattedAddress(startingCity);
-		trip.setTripLatitude(startingLat);
-		trip.setTripLongitude(startingLng);
-		tripDAO.saveNewTrip(trip);
-		map.put("newTripJSON", selectedPlaces);
-		return "route";
+		if(currentUser == null) {
+			map.put("newTripJSON", selectedPlaces);
+			return "route";
+
+		} else {
+			trip.setUserId(userDAO.getUserIdByUserName(currentUser.getUserName()));
+			trip.setTripName(tripName);
+			trip.setTripJson(selectedPlaces);
+			trip.setTripFormattedAddress(startingCity);
+			trip.setTripLatitude(startingLat);
+			trip.setTripLongitude(startingLng);
+			tripDAO.saveNewTrip(trip);
+			map.put("newTripJSON", selectedPlaces);
+			return "route";
+		}
+
 	}
 }

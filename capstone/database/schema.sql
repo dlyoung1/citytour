@@ -22,7 +22,7 @@ CREATE TABLE app_user (
 
 CREATE TABLE trip (
   id SERIAL,
-  user_id integer NOT NULL,
+  user_id integer,
   trip_name varchar(100),
   create_date timestamptz,
   last_edit_date timestamptz,

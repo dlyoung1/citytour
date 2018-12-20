@@ -75,9 +75,9 @@ div.container {
 			</form>
 		</div>
 		
-			<div class="col">
+			<div class="col" id="placeListCol" style="display: none;">
 				<div class="card text-center placesList"
-					style="float: left; background-color: white; overflow-y: scroll; height: 500px; max-width: 330px; display: none;"
+					style="float: left; background-color: white; overflow-y: scroll; height: 500px; max-width: 330px;"
 						id="placeList"></div>
 			</div>
 				
@@ -112,7 +112,7 @@ div.container {
 							$("#address").val(placeAddress);
 							$("#submit").on('click', function(e){
 								$(".categoriesCard").hide();
-								$("#placeList").show();
+								$("#placeListCol").show();
 							})
 							var html = '';
 							var types = [ 'entertainment', 'cultural',

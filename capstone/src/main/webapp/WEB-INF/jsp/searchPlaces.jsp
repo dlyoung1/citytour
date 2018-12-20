@@ -22,8 +22,16 @@ div.container {
 	margin: 0 auto;
 }
 </style>
+<c:if test="${not empty place}">
+	<div id="placeJSON" data-json='${place}'></div>
+</c:if>
 
-<div id="placeJSON" data-json='${place}'></div>
+<c:if test="${not empty savedTrip}">
+	<div id="savedTrip" data-present="true"></div>
+	<div id="savedTripFormattedAddress" data-data="${savedTrip.tripFormattedAddress}"></div>
+	<div id="savedTripLat" data-data="${savedTrip.tripLatitude}"></div>
+	<div id="savedTripLng" data-data="${savedTrip.tripLongitude}"></div>
+</c:if>
 
 <div class="container">
 	
@@ -92,7 +100,7 @@ div.container {
 						function() {
 
 							$("#address")
-									.val(postedPlaceJSON.formatted_address);
+									.val(placeAddress);
 							var html = '';
 							var types = [ 'entertainment', 'cultural',
 									'night_life', 'sports', 'accomodations',
@@ -115,11 +123,27 @@ div.container {
 							$('#type_holder').html(html);
 
 						});
+		
+		var placeAddress;
+		var postedPlaceJSON;
+		var lat;
+		var lng;
 
-		var postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON")
-				.attr("data-json")));
-		var lat = postedPlaceJSON.geometry.location.lat;
-		var lng = postedPlaceJSON.geometry.location.lng;
+		if($("#placeJSON").length != 0) {
+			postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
+			placeAddress = `postedPlaceJSON.formatted_address`;
+			lat = postedPlaceJSON.geometry.location.lat;
+			lng = postedPlaceJSON.geometry.location.lng;
+		} else if($("#savedTrip").length != 0) {
+			placeAddress = $("#savedTripFormattedAddress").attr("data-data");
+			lat = $("#savedTripLat").attr("data-data");
+			lng = $("#savedTripLng").attr("data-data");
+		} else {
+			placeAddress = 'Cincinnati, OH, USA';
+			lat = 39.1031182;
+			lng = -84.51201960000003;
+		}
+
 
 		function capitalizeFirstLetter(string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
@@ -139,7 +163,6 @@ div.container {
 				types : [ '(regions)' ],
 			});
 			var place = new google.maps.LatLng(this.lat, this.lng);
-			console.log(this.lng);
 			map = new google.maps.Map(document.getElementById('map'), {
 				center : place,
 				zoom : 13

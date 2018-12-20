@@ -40,8 +40,8 @@
 		        		var tripId = data[i].tripId;
 		        		var tripName = data[i].tripName;
 		        		var destination = data[i].tripFormattedAddress;
-		        		var createDate = data[i].createDate;
-		        		var departureDate = data[i].departureDate;
+		        		var createDate = data[i].createDateString;
+		        		var departureDate = data[i].departureDateString;
 		            $("#userTrips").append(
 						'<div class="alert alert-dark" role="alert" data-tripId="' + tripId + '">' +
 						'<h4 class="alert-heading">'+ tripName + '</h4>' +
@@ -50,7 +50,7 @@
 						'<a class="btn btn-danger" href="#" role="button" id="deleteTrip' + tripId + '">Delete Trip</a>' +
 						'</form>' +
 						'<hr>' +
-						'<p><b>Destination: </b>' + destination + ' • <b>Creation Date: </b>' + createDate + ' • <b>Departure Date: </b> ' + departureDate + '</p>' +
+						'<p><b>Destination: </b>' + destination + ' • <b>Departure Date: </b> ' + departureDate + ' • <b>Creation Date: </b>' + createDate + '</p>' +
 						'</div>');
 		
 		            $("#deleteTrip"+tripId).on("click", onDeleteButtonClick);

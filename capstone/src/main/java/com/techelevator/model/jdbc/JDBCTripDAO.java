@@ -34,8 +34,8 @@ public class JDBCTripDAO implements TripDAO {
 	@Override
 	public void saveNewTrip(Trip trip) {
 		trip.setTripId(getNextTripSeqId());
-		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, trip_city, trip_country, trip_formatted_address, explore_radius) VALUES (?,?,?,?,?,?,?,?,?,?);";
-		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getTripCity(), trip.getTripCountry(), trip.getTripFormattedAddress(), trip.getExploreRadius());
+		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, trip_city, trip_country, trip_formatted_address, trip_latitude, trip_longitude, explore_radius) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getTripCity(), trip.getTripCountry(), trip.getTripFormattedAddress(), trip.getTripLatitude(), trip.getTripLongitude(), trip.getExploreRadius());
 		int stopNum = 1;
 		for(int i = 0; i < trip.getTripStops().size(); i++) {
 			Place place = trip.getTripStops().get(i);
@@ -233,8 +233,7 @@ public class JDBCTripDAO implements TripDAO {
 	}
 	
 	private Trip mapRowToTrip(SqlRowSet results) {
-		Trip trip = new Trip();
-		trip.setCreateDate(new java.sql.Timestamp(results.getDate("create_date").getTime()).toLocalDateTime());
+		Trip trip = new Trip(new java.sql.Timestamp(results.getDate("create_date").getTime()).toLocalDateTime(), new java.sql.Timestamp(results.getDate("departure_date").getTime()).toLocalDateTime());
 		trip.setExploreRadius(results.getInt("explore_radius"));
 		trip.setTripId(results.getInt("id"));
 		trip.setTripName(results.getString("trip_name"));
@@ -243,9 +242,8 @@ public class JDBCTripDAO implements TripDAO {
 		trip.setTripCity(results.getString("trip_city"));
 		trip.setTripCountry(results.getString("trip_country"));
 		trip.setTripFormattedAddress(results.getString("trip_formatted_address"));
-		if(results.getString("departure_date") != null) {
-			trip.setDepartureDate(new java.sql.Timestamp(results.getDate("departure_date").getTime()).toLocalDateTime());
-		}
+		trip.setTripLatitude(results.getDouble("trip_latitude"));
+		trip.setTripLongitude(results.getDouble("trip_longitude"));
 		if(results.getString("last_edit_date") != null) {
 			trip.setLastEditDate(new java.sql.Timestamp(results.getDate("last_edit_date").getTime()).toLocalDateTime());
 		}

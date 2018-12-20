@@ -24,23 +24,25 @@ CREATE TABLE trip (
   id SERIAL,
   user_id integer NOT NULL,
   trip_name varchar(100),
-  create_date timestamptz NOT NULL,
+  create_date timestamptz,
   last_edit_date timestamptz,
   departure_date timestamptz,
-  trip_city_zip_code integer CHECK (trip_city_zip_code >= 10000 AND trip_city_zip_code <= 99999) NOT NULL,
+  trip_city_zip_code integer,
   trip_city varchar,
   trip_state varchar,
   trip_country varchar,
   trip_formatted_address varchar,
-  explore_radius integer CHECK (explore_radius >= 1 AND explore_radius <= 999) NOT NULL,
+  trip_latitude numeric,
+  trip_longitude numeric,
+  explore_radius integer CHECK (explore_radius >= 1 AND explore_radius <= 999),
   CONSTRAINT pk_trip_id PRIMARY KEY (id),
   CONSTRAINT fk_trip_user_id FOREIGN KEY (user_id) REFERENCES app_user(id)
 );
 
 CREATE TABLE place (
   id SERIAL,
-  latitude varchar(24) NOT NULL,
-  longitude varchar(24) NOT NULL,
+  latitude varchar(24),
+  longitude varchar(24),
   place_name text,
   description text,
   CONSTRAINT pk_place_id PRIMARY KEY (id)

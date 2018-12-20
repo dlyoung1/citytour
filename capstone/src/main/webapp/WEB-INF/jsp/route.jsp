@@ -27,7 +27,7 @@
         	  
         	  var map = new google.maps.Map(document.getElementById('map'), {
           	    zoom: 13,
-          	    center: {lat: origin.geometry.location.lng, lng: destination.geometry.location.lng}
+          	    center: {lat: origin.geometry.location.lat, lng: origin.geometry.location.lng}
           	  });
           	  directionsDisplay.setMap(map);
           	  directionsDisplay.setPanel(document.getElementById('directionsPanel'));

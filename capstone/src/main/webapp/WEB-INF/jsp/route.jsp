@@ -5,12 +5,7 @@
         function initMap() {
         	  var directionsService = new google.maps.DirectionsService();
         	  var directionsDisplay = new google.maps.DirectionsRenderer();
-        	  var map = new google.maps.Map(document.getElementById('map'), {
-        	    zoom: 13,
-        	    center: {lat: 39.1031, lng: -84.5120}
-        	  });
-        	  directionsDisplay.setMap(map);
-        	  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+        	  
         	  var waypts = [];
         	  var origin;
         	  var destination;
@@ -18,7 +13,6 @@
         	  var placesArray = places.split(",");
         	  for (var i = 0; i < placesArray.length; i++) {
         		  let info = JSON.parse(decodeURIComponent(placesArray[i]));
-        		  console.log("info: " + info.geometry.location.lng);
         		  if(i == 0) {
         			  origin = info;
         		  } else if(i == placesArray.length - 1) {
@@ -30,6 +24,13 @@
 	        	      });
         		  }
         	    }
+        	  
+        	  var map = new google.maps.Map(document.getElementById('map'), {
+          	    zoom: 13,
+          	    center: {lat: origin.geometry.location.lng, lng: destination.geometry.location.lng}
+          	  });
+          	  directionsDisplay.setMap(map);
+          	  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
         	  directionsService.route({
         	    origin: origin.vicinity,

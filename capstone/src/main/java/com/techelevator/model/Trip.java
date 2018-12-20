@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,9 @@ public class Trip {
 	private LocalDateTime createDate;
 	private LocalDateTime lastEditDate;
 	private LocalDateTime departureDate;
+	private String createDateString;
+	private String lastEditDateString;
+	private String departureDateString;
 	private int tripCityZipCode;
 	private double tripLatitude;
 	private double tripLongitude;
@@ -19,11 +23,20 @@ public class Trip {
 	private String tripCity;
 	private String tripState;
 	private String tripCountry;
+	private String tripJson;
 	private int exploreRadius;
 	private List<Place> tripStops;
 	
 	public Trip() {
 		this.tripStops = new ArrayList<Place>();
+	}
+	
+	public Trip(LocalDateTime createDate, LocalDateTime departureDate) {
+		this.tripStops = new ArrayList<Place>();
+		this.createDate = createDate;
+		this.departureDate = departureDate;
+		setCreateDateString(this.createDate);
+		setDepartureDateString(this.departureDate);
 	}
 	
 	public int getTripId() {
@@ -62,6 +75,26 @@ public class Trip {
 	public void setDepartureDate(LocalDateTime departureDate) {
 		this.departureDate = departureDate;
 	}
+	public String getCreateDateString() {
+		return createDateString;
+	}
+	private void setCreateDateString(LocalDateTime createDate) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		this.createDateString = createDate.format(formatter);
+	}
+	public String getLastEditDateString() {
+		return lastEditDateString;
+	}
+	public void setLastEditDateString(String lastEditDateString) {
+		this.lastEditDateString = lastEditDateString;
+	}
+	public String getDepartureDateString() {
+		return departureDateString;
+	}
+	private void setDepartureDateString(LocalDateTime departureDate) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM dd, yyyy");
+		this.departureDateString = departureDate.format(formatter);
+	}
 	public int getTripCityZipCode() {
 		return tripCityZipCode;
 	}
@@ -71,19 +104,15 @@ public class Trip {
 	public double getTripLatitude() {
 		return tripLatitude;
 	}
-
 	public void setTripLatitude(double tripLatitude) {
 		this.tripLatitude = tripLatitude;
 	}
-
 	public double getTripLongitude() {
 		return tripLongitude;
 	}
-
 	public void setTripLongitude(double tripLongitude) {
 		this.tripLongitude = tripLongitude;
 	}
-
 	public String getTripFormattedAddress() {
 		return tripFormattedAddress;
 	}
@@ -108,6 +137,14 @@ public class Trip {
 	public void setTripCountry(String tripCountry) {
 		this.tripCountry = tripCountry;
 	}
+	public String getTripJson() {
+		return tripJson;
+	}
+
+	public void setTripJson(String tripJson) {
+		this.tripJson = tripJson;
+	}
+
 	public int getExploreRadius() {
 		return exploreRadius;
 	}

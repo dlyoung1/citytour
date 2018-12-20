@@ -5,27 +5,37 @@
         function initMap() {
         	  var directionsService = new google.maps.DirectionsService();
         	  var directionsDisplay = new google.maps.DirectionsRenderer();
-        	  var map = new google.maps.Map(document.getElementById('map'), {
-        	    zoom: 13,
-        	    center: {lat: 39.1031, lng: -84.5120}
-        	  });
-        	  directionsDisplay.setMap(map);
+        	  
         	  var waypts = [];
-        	  var places = document.getElementById('places').value;
+        	  var origin;
+        	  var destination;
+        	  var places = $('#places').attr('data-json');
         	  var placesArray = places.split(",");
-        	  for (var i = 1; i < placesArray.length - 1; i++) {
-        	      waypts.push({
-        	        location: placesArray[i],
-        	        stopover: true
-        	      });
+        	  for (var i = 0; i < placesArray.length; i++) {
+        		  let info = JSON.parse(decodeURIComponent(placesArray[i]));
+        		  if(i == 0) {
+        			  origin = info;
+        		  } else if(i == placesArray.length - 1) {
+        			  destination = info;
+        		  } else {
+	        	      waypts.push({
+	        	        location: info.vicinity,
+	        	        stopover: true
+	        	      });
+        		  }
         	    }
+        	  
+        	  var map = new google.maps.Map(document.getElementById('map'), {
+          	    zoom: 13,
+          	    center: {lat: origin.geometry.location.lat, lng: origin.geometry.location.lng}
+          	  });
+          	  directionsDisplay.setMap(map);
+          	  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
         	  directionsService.route({
-        		origin: {lat: 38, lng: -84},
-        		destination: {lat: 49, lng: -86},
-        	    /* origin: waypts[0],
-        	    destination: waypts[waypts.length - 1], */
-        	    waypoints: [{lat: 38, lng: -84}, {lat: 38, lng: -84}],
+        	    origin: origin.vicinity,
+        	    destination: destination.vicinity,
+        	    waypoints: waypts,
         	    optimizeWaypoints: true,
         	    travelMode: 'DRIVING'
         	  }, function(response, status) {
@@ -50,30 +60,17 @@
         }
     </script>
     
-    <input type="hidden" id="places" value="${places}"/>
-    
-    <div id = "mode-selector" class = "controls">
-        <input type = "radio" name = "type" id = "changemode-walking" checked = "checked">
-        <label for = "changemode-walking">Walking</label>
+<c:if test="${not empty newTripJSON}">
+    <input type="hidden" id="places" data-json="${newTripJSON}"/>
+</c:if>
 
-        <input type = "radio" name = "type" id = "changemode-transit">
-        <label for = "changemode-transit">Transit</label>
-
-        <input type = "radio" name = "type" id = "changemode-driving">
-        <label for = "changemode-driving">Driving</label>
-    </div>
+<c:if test="${not empty savedTripJSON}">
+    <input type="hidden" id="places" data-json="${savedTripJSON}"/>
+</c:if>
 	
-    <div>
-        <input id = "origin-input" type = "text" placeholder = "Enter an origin location">
-    </div>
 
-
-    <div>
-        <input id = "destination-input" type = "text" placeholder = "Enter a destination location">
-    </div>
-
-    <div id = "map" style="width:500px; height:500px"></div>
-    <div id="directionsPanel" style="float:right;width:30%;height 100%"></div>
+    <div id = "map" style="width:500px; height:500px; display:inline-block; vertical-align:top"></div>
+    <div id="directionsPanel" style="display:inline-block;background-color:white;width:30%;height 100%"></div>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initMap"
         async defer></script>

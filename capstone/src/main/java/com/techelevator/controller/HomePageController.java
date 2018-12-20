@@ -1,13 +1,32 @@
 package com.techelevator.controller;
 
+import java.time.LocalDateTime;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techelevator.model.Trip;
+import com.techelevator.model.TripDAO;
+import com.techelevator.model.User;
+import com.techelevator.model.UserDAO;
+
 @Controller
 public class HomePageController {
+	
+	private TripDAO tripDAO;
+	private UserDAO userDAO;
+
+	@Autowired
+	public HomePageController(TripDAO tripDAO, UserDAO userDAO) {
+		this.tripDAO = tripDAO;
+		this.userDAO = userDAO;
+	}
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String viewHomePage(ModelMap map) {
@@ -25,9 +44,30 @@ public class HomePageController {
 		return "searchPlaces";
 	}
 	
-	@RequestMapping(value="/route", method=RequestMethod.POST)
-	public String displayRoute(@RequestParam String selectedPlaces, ModelMap map) {
-		map.put("places", selectedPlaces);
+	@RequestMapping(value="/route", method=RequestMethod.GET)
+	public String displaySavedRoute() {
 		return "route";
+	}
+	
+	@RequestMapping(value="/route", method=RequestMethod.POST)
+	public String displayNewRoute(@RequestParam String selectedPlaces, @RequestParam String tripName, @RequestParam String startingCity, @RequestParam double startingLat, @RequestParam double startingLng, ModelMap map, HttpSession session) {
+		Trip trip = new Trip(LocalDateTime.now(), LocalDateTime.now());
+		User currentUser = (User)session.getAttribute("currentUser");
+		if(currentUser == null) {
+			map.put("newTripJSON", selectedPlaces);
+			return "route";
+
+		} else {
+			trip.setUserId(userDAO.getUserIdByUserName(currentUser.getUserName()));
+			trip.setTripName(tripName);
+			trip.setTripJson(selectedPlaces);
+			trip.setTripFormattedAddress(startingCity);
+			trip.setTripLatitude(startingLat);
+			trip.setTripLongitude(startingLng);
+			tripDAO.saveNewTrip(trip);
+			map.put("newTripJSON", selectedPlaces);
+			return "route";
+		}
+
 	}
 }

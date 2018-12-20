@@ -2,96 +2,55 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
     <script>
-        var infowindow;
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                mapTypeControl: false,
-                center: { lat: 39.1031, lng: -84.5120 },
-                zoom: 13
-            });
-            new AutocompleteDirectionsHandler(map);
+        	  var directionsService = new google.maps.DirectionsService();
+        	  var directionsDisplay = new google.maps.DirectionsRenderer();
+        	  var map = new google.maps.Map(document.getElementById('map'), {
+        	    zoom: 13,
+        	    center: {lat: 39.1031, lng: -84.5120}
+        	  });
+        	  directionsDisplay.setMap(map);
+        	  var waypts = [];
+        	  var places = document.getElementById('places').value;
+        	  var placesArray = places.split(",");
+        	  for (var i = 1; i < placesArray.length - 1; i++) {
+        	      waypts.push({
+        	        location: placesArray[i],
+        	        stopover: true
+        	      });
+        	    }
+
+        	  directionsService.route({
+        		origin: {lat: 38, lng: -84},
+        		destination: {lat: 49, lng: -86},
+        	    /* origin: waypts[0],
+        	    destination: waypts[waypts.length - 1], */
+        	    waypoints: [{lat: 38, lng: -84}, {lat: 38, lng: -84}],
+        	    optimizeWaypoints: true,
+        	    travelMode: 'DRIVING'
+        	  }, function(response, status) {
+        	    if (status === 'OK') {
+        	      directionsDisplay.setDirections(response);
+        	      var route = response.routes[0];
+        	      var summaryPanel = document.getElementById('directions-panel');
+        	      summaryPanel.innerHTML = '';
+        	      // For each route, display summary information.
+        	      for (var i = 0; i < route.legs.length; i++) {
+        	        var routeSegment = i + 1;
+        	        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+        	            '</b><br>';
+        	        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        	        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+        	        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+        	      }
+        	    } else {
+        	      window.alert('Directions request failed due to ' + status);
+        	    }
+        	  });
         }
-
-        function AutocompleteDirectionsHandler(map) {
-            this.map = map;
-            this.originPlaceId = null;
-            this.destinationPlaceId = null;
-            this.travelMode = 'WALKING';
-            var originInput = document.getElementById('origin-input');
-            var destinationInput = document.getElementById('destination-input');
-            var modeSelector = document.getElementById('mode-selector');
-            this.directionsService = new google.maps.DirectionsService;
-            this.directionsDisplay = new google.maps.DirectionsRenderer;
-            this.directionsDisplay.setMap(map);
-
-            var originAutocomplete = new google.maps.places.Autocomplete(
-                originInput, { placeIdOnly: true });
-            var destinationAutocomplete = new google.maps.places.Autocomplete(
-                destinationInput, { placeIdOnly: true });
-
-            this.setupClickListener('changemode-walking', 'WALKING');
-            this.setupClickListener('changemode-transit', 'TRANSIT');
-            this.setupClickListener('changemode-driving', 'DRIVING');
-
-            this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-            this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-        }
-
-        AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-            var radioButton = document.getElementById(id);
-            var me = this;
-            radioButton.addEventListener('click', function() {
-                me.travelMode = mode;
-                me.route();
-            });
-        };
-
-        AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
-            var me = this;
-            autocomplete.bindTo('bounds', this.map);
-            autocomplete.addListener('place_changed', function () {
-                var place = autocomplete.getPlace();
-                if(!place.place_id) {
-                    window.alert("Please select an option from the dropdown list.");
-                    return;
-                }
-                if(mode === 'ORIG') {
-                    me.originPlaceId = place.place_id;
-                } else {
-                    me.destinationPlaceId = place.place_id;
-                }
-                me.route();
-            });
-
-        };
-
-        AutocompleteDirectionsHandler.prototype.route = function() {
-            if (!this.originPlaceId || !this.destinationPlaceId) {
-                return;
-            }
-            var me = this;
-
-            this.directionsService.route({
-                origin: { 'placeId': this.originPlaceId },
-                destination: { 'placeId': this.destinationPlaceId },
-                travelMode: this.travelMode
-            }, function (response, status) {
-                if (status === 'OK') {
-                    me.directionsDisplay.setDirections(response);
-
-                    document.getElementById('startlat').innerHTML = response.routes[0].legs[0].start_location.lat();
-                    document.getElementById('startlng').innerHTML = response.routes[0].legs[0].start_location.lng();
-                    document.getElementById('endlat').innerHTML = response.routes[0].legs[0].end_location.lat();
-                    document.getElementById('endlng').innerHTML = response.routes[0].legs[0].end_location.lng();
-
-
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-        };
     </script>
+    
+    <input type="hidden" id="places" value="${places}"/>
     
     <div id = "mode-selector" class = "controls">
         <input type = "radio" name = "type" id = "changemode-walking" checked = "checked">
@@ -103,7 +62,7 @@
         <input type = "radio" name = "type" id = "changemode-driving">
         <label for = "changemode-driving">Driving</label>
     </div>
-
+	
     <div>
         <input id = "origin-input" type = "text" placeholder = "Enter an origin location">
     </div>
@@ -114,6 +73,7 @@
     </div>
 
     <div id = "map" style="width:500px; height:500px"></div>
+    <div id="directionsPanel" style="float:right;width:30%;height 100%"></div>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initMap"
         async defer></script>

@@ -8,6 +8,8 @@ public interface TripDAO {
 	public List<Trip> getAllTripsForUser(Integer userId);
 	public void updateSavedTrip(Trip trip);
 	public void deleteSavedTrip(Integer tripId);
+	public Trip getTripByTripId(Integer tripId);
+
 
 
 }

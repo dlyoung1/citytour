@@ -34,8 +34,8 @@ public class JDBCTripDAO implements TripDAO {
 	@Override
 	public void saveNewTrip(Trip trip) {
 		trip.setTripId(getNextTripSeqId());
-		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, explore_radius) VALUES (?,?,?,?,?,?,?);";
-		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getExploreRadius());
+		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, trip_city, trip_country, trip_formatted_address, explore_radius) VALUES (?,?,?,?,?,?,?,?,?,?);";
+		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getTripCity(), trip.getTripCountry(), trip.getTripFormattedAddress(), trip.getExploreRadius());
 		int stopNum = 1;
 		for(int i = 0; i < trip.getTripStops().size(); i++) {
 			Place place = trip.getTripStops().get(i);
@@ -68,6 +68,18 @@ public class JDBCTripDAO implements TripDAO {
 		return allTrips;
 	}
 	
+	@Override
+	public Trip getTripByTripId(Integer tripId) {
+		Trip trip = new Trip();
+		String getTripByTripIdSql = "SELECT * FROM trip WHERE id = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(getTripByTripIdSql, tripId);
+		while(results.next()) {
+			trip = mapRowToTrip(results);
+			trip.setTripStops(getAllPlacesForTrip(trip));
+		}
+		return trip;
+	}
+	
 	//Used in the above getAllTripsForUser method and below in the updateSavedTrip method
 	private List<Place> getAllPlacesForTrip(Trip trip) {
 		List<Place> allStopsForTrip = new ArrayList<Place>();
@@ -79,6 +91,7 @@ public class JDBCTripDAO implements TripDAO {
 		}
 		return allStopsForTrip;
 	}
+	
 	
 	@Override
 	public void updateSavedTrip(Trip updatedTrip) {
@@ -226,6 +239,10 @@ public class JDBCTripDAO implements TripDAO {
 		trip.setTripId(results.getInt("id"));
 		trip.setTripName(results.getString("trip_name"));
 		trip.setUserId(results.getInt("user_id"));
+		trip.setTripCityZipCode(results.getInt("trip_city_zip_code"));
+		trip.setTripCity(results.getString("trip_city"));
+		trip.setTripCountry(results.getString("trip_country"));
+		trip.setTripFormattedAddress(results.getString("trip_formatted_address"));
 		if(results.getString("departure_date") != null) {
 			trip.setDepartureDate(new java.sql.Timestamp(results.getDate("departure_date").getTime()).toLocalDateTime());
 		}

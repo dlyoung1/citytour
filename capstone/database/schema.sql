@@ -28,6 +28,10 @@ CREATE TABLE trip (
   last_edit_date timestamptz,
   departure_date timestamptz,
   trip_city_zip_code integer CHECK (trip_city_zip_code >= 10000 AND trip_city_zip_code <= 99999) NOT NULL,
+  trip_city varchar,
+  trip_state varchar,
+  trip_country varchar,
+  trip_formatted_address varchar,
   explore_radius integer CHECK (explore_radius >= 1 AND explore_radius <= 999) NOT NULL,
   CONSTRAINT pk_trip_id PRIMARY KEY (id),
   CONSTRAINT fk_trip_user_id FOREIGN KEY (user_id) REFERENCES app_user(id)

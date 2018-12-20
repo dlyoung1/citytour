@@ -7,6 +7,7 @@ public class Place {
 	private String longitude;
 	private String placeName;
 	private String description;
+	private String placeJson;
 	
 	public Place() {
 		this.placeId = 0;
@@ -40,6 +41,12 @@ public class Place {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getPlaceJson() {
+		return placeJson;
+	}
+	public void setPlaceJson(String placeJson) {
+		this.placeJson = placeJson;
 	}
 	
 }

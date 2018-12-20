@@ -40,8 +40,8 @@ public class JDBCTripDAO implements TripDAO {
 		for(int i = 0; i < trip.getTripStops().size(); i++) {
 			Place place = trip.getTripStops().get(i);
 			place.setPlaceId(getNextPlaceSeqId());
-			String saveNewPlaceSql = "INSERT INTO place(id, latitude, longitude, place_name, description) VALUES (?,?,?,?,?);";
-			jdbcTemplate.update(saveNewPlaceSql, place.getPlaceId(), place.getLatitude(), place.getLongitude(), place.getPlaceName(), place.getDescription());
+			String saveNewPlaceSql = "INSERT INTO place(id, latitude, longitude, place_name, description, place_json) VALUES (?,?,?,?,?,?);";
+			jdbcTemplate.update(saveNewPlaceSql, place.getPlaceId(), place.getLatitude(), place.getLongitude(), place.getPlaceName(), place.getDescription(), place.getPlaceJson());
 			String saveTripPlaceRelationSql = "INSERT INTO trip_place(trip_id, place_id, stop_number) VALUES (?,?,?);";
 			jdbcTemplate.update(saveTripPlaceRelationSql, trip.getTripId(), place.getPlaceId(), stopNum);
 			stopNum++;
@@ -267,6 +267,7 @@ public class JDBCTripDAO implements TripDAO {
 		place.setLongitude(results.getString("longitude"));
 		place.setPlaceId(results.getInt("id"));
 		place.setPlaceName(results.getString("place_name"));
+		place.setPlaceJson(results.getString("place_json"));
 		return place;
 	}
 }

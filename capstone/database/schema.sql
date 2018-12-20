@@ -44,6 +44,7 @@ CREATE TABLE place (
   latitude varchar(24),
   longitude varchar(24),
   place_name text,
+  place_json varchar,
   description text,
   CONSTRAINT pk_place_id PRIMARY KEY (id)
 );

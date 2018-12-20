@@ -10,6 +10,7 @@
         	    center: {lat: 39.1031, lng: -84.5120}
         	  });
         	  directionsDisplay.setMap(map);
+        	  directionsDisplay.setPanel(document.getElementById('directionsPanel'));
         	  var waypts = [];
         	  var origin;
         	  var destination;
@@ -29,9 +30,6 @@
 	        	      });
         		  }
         	    }
-        	  console.log("origin(lat): " + origin.geometry.location.lat + " origin(lng): " + origin.geometry.location.lng);
-    		  console.log("destination(lat): " + destination.geometry.location.lat + " destination(lng): " + destination.geometry.location.lng);
-    		  console.log("waypts: " + waypts);
 
         	  directionsService.route({
         	    origin: origin.vicinity,
@@ -62,29 +60,10 @@
     </script>
     
     <input type="hidden" id="places" data-json="${places}"/>
-    
-    <div id = "mode-selector" class = "controls">
-        <input type = "radio" name = "type" id = "changemode-walking" checked = "checked">
-        <label for = "changemode-walking">Walking</label>
-
-        <input type = "radio" name = "type" id = "changemode-transit">
-        <label for = "changemode-transit">Transit</label>
-
-        <input type = "radio" name = "type" id = "changemode-driving">
-        <label for = "changemode-driving">Driving</label>
-    </div>
 	
-    <div>
-        <input id = "origin-input" type = "text" placeholder = "Enter an origin location">
-    </div>
 
-
-    <div>
-        <input id = "destination-input" type = "text" placeholder = "Enter a destination location">
-    </div>
-
-    <div id = "map" style="width:500px; height:500px"></div>
-    <div id="directionsPanel" style="float:right;width:30%;height 100%"></div>
+    <div id = "map" style="width:500px; height:500px; display:inline-block; vertical-align:top"></div>
+    <div id="directionsPanel" style="display:inline-block;background-color:white;width:30%;height 100%"></div>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initMap"
         async defer></script>

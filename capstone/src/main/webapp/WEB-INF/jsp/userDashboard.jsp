@@ -29,13 +29,13 @@
 	    $.ajax({
 	        url: root + '/getTrips',
 	        method: 'GET'
-	    }).then(function (data) {
+	    }).done(function (data) {
+	        $("#userTrips").empty();
 			if(userName == '') {
 	            $("#userTrips").append('<p>Please Log in</p>');
 			} else if(data.length < 1) {
 	            $("#userTrips").append("<p>You don't have any trips saved!</p>");
 			} else {
-		        $("#userTrips").empty();
 		        for (var i = 0; i < data.length; i++) {
 		        		var tripId = data[i].tripId;
 		        		var tripName = data[i].tripName;

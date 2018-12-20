@@ -42,6 +42,7 @@ public class HomePageController {
 	public String displayRoute(@RequestParam String selectedPlaces, ModelMap map) {
 		Trip trip = new Trip(LocalDateTime.now(), LocalDateTime.now());
 		trip.setTripJson(selectedPlaces);
+		trip.setUserId(1);
 		trip.setTripFormattedAddress("Cincinnati, OH, USA");
 		trip.setTripLatitude(39.1031182);
 		trip.setTripLongitude(-84.51201960000003);

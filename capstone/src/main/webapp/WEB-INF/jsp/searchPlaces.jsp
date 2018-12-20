@@ -74,16 +74,19 @@ div.container {
 				</div>
 			</form>
 		</div>
-				<div class="col">
+		
+			<div class="col">
+				<div class="card text-center placesList"
+					style="float: left; background-color: white; overflow-y: scroll; height: 500px; max-width: 330px; display: none;"
+						id="placeList"></div>
+			</div>
+				
+			<div class="col">
 				<div id="map" style="min-width: 330px; width: 500px; height: 500px;"></div>
 			</div>
 		
 
-		<div class="col">
-			<div class="card text-center placesList"
-				style="float: left; background-color: white; overflow-y: scroll; height: 500px; max-width: 330px;"
-				id="placeList"></div>
-		</div>
+
 </div>
 </div>
 
@@ -107,6 +110,10 @@ div.container {
 							$("#startingLat").val(lat);
 							$("#startingLng").val(lng);
 							$("#address").val(placeAddress);
+							$("#submit").on('click', function(e){
+								$(".categoriesCard").hide();
+								$("#placeList").show();
+							})
 							var html = '';
 							var types = [ 'entertainment', 'cultural',
 									'night_life', 'sports', 'accomodations',

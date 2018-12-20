@@ -91,6 +91,10 @@ div.container {
 	<c:url var="addSelection" value="/route" />
 	<form name="selected" method="POST" action="${addSelection}">
 		<div id="selected"></div>
+		<input type="text" name="tripName" id="tripName" placeHolder="Name Your Trip Here">
+		<input type="hidden" name="startingCity" id="startingCity" value="">
+		<input type="hidden" name="startingLat" id="startingLat" value="">
+		<input type="hidden" name="startingLng" id="startingLng" value="">
 		<input type="submit" value="add locations">
 	</form>
 </div> 
@@ -99,9 +103,10 @@ div.container {
 		$(document)
 				.ready(
 						function() {
-
-							$("#address")
-									.val(placeAddress);
+							$("#startingCity").val(placeAddress);
+							$("#startingLat").val(lat);
+							$("#startingLng").val(lng);
+							$("#address").val(placeAddress);
 							var html = '';
 							var types = [ 'entertainment', 'cultural',
 									'night_life', 'sports', 'accomodations',

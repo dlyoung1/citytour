@@ -46,7 +46,7 @@
 						'<div class="alert alert-dark" role="alert" data-tripId="' + tripId + '">' +
 						'<h4 class="alert-heading">'+ tripName + '</h4>' +
 						'<form method="POST" action="'+root+"/edit?tripId="+tripId+'">' +
-						'<input type="submit" class="btn btn-primary" value="Edit Trip" role="button" id="editTrip' + tripId + '">' +
+						'<input type="submit" class="btn btn-primary" value="Route Trip" role="button" id="editTrip' + tripId + '">' +
 						'<a class="btn btn-danger" href="#" role="button" id="deleteTrip' + tripId + '">Delete Trip</a>' +
 						'</form>' +
 						'<hr>' +

@@ -23,6 +23,7 @@ public class Trip {
 	private String tripCity;
 	private String tripState;
 	private String tripCountry;
+	private String tripJson;
 	private int exploreRadius;
 	private List<Place> tripStops;
 	
@@ -136,6 +137,14 @@ public class Trip {
 	public void setTripCountry(String tripCountry) {
 		this.tripCountry = tripCountry;
 	}
+	public String getTripJson() {
+		return tripJson;
+	}
+
+	public void setTripJson(String tripJson) {
+		this.tripJson = tripJson;
+	}
+
 	public int getExploreRadius() {
 		return exploreRadius;
 	}

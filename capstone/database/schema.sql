@@ -34,6 +34,7 @@ CREATE TABLE trip (
   trip_formatted_address varchar,
   trip_latitude numeric,
   trip_longitude numeric,
+  trip_json varchar,
   explore_radius integer CHECK (explore_radius >= 1 AND explore_radius <= 999),
   CONSTRAINT pk_trip_id PRIMARY KEY (id),
   CONSTRAINT fk_trip_user_id FOREIGN KEY (user_id) REFERENCES app_user(id)

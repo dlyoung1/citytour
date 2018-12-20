@@ -34,8 +34,8 @@ public class JDBCTripDAO implements TripDAO {
 	@Override
 	public void saveNewTrip(Trip trip) {
 		trip.setTripId(getNextTripSeqId());
-		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, trip_city, trip_country, trip_formatted_address, trip_latitude, trip_longitude, explore_radius) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getTripCity(), trip.getTripCountry(), trip.getTripFormattedAddress(), trip.getTripLatitude(), trip.getTripLongitude(), trip.getExploreRadius());
+		String saveNewTripSql = "INSERT INTO trip(id, user_id, trip_name, create_date, departure_date, trip_city_zip_code, trip_city, trip_country, trip_formatted_address, trip_latitude, trip_longitude, trip_json, explore_radius) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		jdbcTemplate.update(saveNewTripSql, trip.getTripId(), trip.getUserId(), trip.getTripName(), trip.getCreateDate(), trip.getDepartureDate(), trip.getTripCityZipCode(), trip.getTripCity(), trip.getTripCountry(), trip.getTripFormattedAddress(), trip.getTripLatitude(), trip.getTripLongitude(), trip.getTripJson(), trip.getExploreRadius());
 		int stopNum = 1;
 		for(int i = 0; i < trip.getTripStops().size(); i++) {
 			Place place = trip.getTripStops().get(i);
@@ -244,6 +244,7 @@ public class JDBCTripDAO implements TripDAO {
 		trip.setTripFormattedAddress(results.getString("trip_formatted_address"));
 		trip.setTripLatitude(results.getDouble("trip_latitude"));
 		trip.setTripLongitude(results.getDouble("trip_longitude"));
+		trip.setTripJson(results.getString("trip_json"));
 		if(results.getString("last_edit_date") != null) {
 			trip.setLastEditDate(new java.sql.Timestamp(results.getDate("last_edit_date").getTime()).toLocalDateTime());
 		}

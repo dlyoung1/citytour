@@ -150,8 +150,8 @@ hr {
 			<br>
 			<p class="card-text">
 				<span class="highlight">Let <span
-					style="font-family: 'Special Elite', cursive; font-size: 18px; font-weight: bold">&nbsp;City
-						Tour&nbsp;</span> help you plan the most efficient route to see as many
+					style="font-family: 'Special Elite', cursive; font-size: 18px; font-weight: bold">City
+						Tour</span> help you plan the most efficient route to see as many
 					local landmarks as possible!
 				</span>
 			</p>

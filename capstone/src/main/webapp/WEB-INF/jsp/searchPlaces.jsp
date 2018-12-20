@@ -2,84 +2,122 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
 <style>
-.container#mapPage {
-	margin-top: 30px;
-	padding-bottom: 20px;
+h4 {
+	font-family: 'Special Elite', cursive;
+	text-decoration: underline;
 }
 
-.categoriesCard {
-	margin-bottom: 15px;
-	margin-left: 15px;
+hr {
+	margin-top: 10px;
+	border-top: 1.5px solid black;
+}
+
+li {
+	list-style-image: url(img/current-location.png)
+}
+.card {
+	opacity: 0.8;
+}
+div.container {
+	margin: 0 auto;
 }
 </style>
 
 <div id="placeJSON" data-json='${place}'></div>
 
-<div id="mapPage" class="container">
+<div class="container">
+	
+	<div class="row">
 
-	<div class="categoriesCard" style="float: left;">
-		<form name="frm_map" id="frm_map">
+		<div class="categoriesCard" style="float: left;">
 
-		<div class="container">
-			<div class="card text-center bg-light"
-				style="width: 20rem; height: 100%">
-				<div class="card-body">
-					<input type="hidden" name="address" id="address" value="">
-					
-					<h5 class="card-title text-left"><span
-							style="font-family: 'Special Elite', cursive; font-size: 24px">Radius:</span>
-					<input type="text" name="radius" id="radius" value="" placeholder="...in miles">
-					</h5>
-					<h5 class="card-title text-left">
-						<span
-							style="font-family: 'Special Elite', cursive; font-size: 24px">Categories:</span>
-					</h5>
-					<div id="type_holder" style="height: 380px; overflow-y: scroll">
-					</div>
-					<div class="typeButtons">
-						<input type="button" class="btn btn-warning" value="Show"
-							id="submit" onclick="renderMap();"> <input type="reset"
-							class="btn btn-warning" value="Reset">
+			<form name="frm_map" id="frm_map">
+				<div class="col">
+					<div class="card text-center"
+						style="width: 250px; height: 500px" id="categories">
+						<div class="card-body">
+							<input type="hidden" name="address" id="address" value="">
+
+							<h5 class="card-title text-left">
+								<span
+									style="font-family: 'Special Elite', cursive; font-size: 24px">Radius:</span>
+								<select>
+									<option id="radius" value="8.04672">5</option>
+									<option id="radius" value="16.0934">10</option>
+									<option id="radius" value="24.1402">15</option>
+									<option id="radius" value="32.1869">20</option>
+								</select>
+
+							</h5>
+							<h5 class="card-title text-left">
+								<span
+									style="font-family: 'Special Elite', cursive; font-size: 24px">Categories:</span>
+							</h5>
+							<div id="type_holder" style="height: 340px; overflow-y: scroll">
+							</div>
+							<div>
+								<input type="button" class="btn btn-warning" value="Show"
+									id="submit" onclick="renderMap();"> <input type="reset"
+									class="btn btn-warning" value="Reset">
+							</div>
+						</div>
 					</div>
 				</div>
+			</form>
+		</div>
+				<div class="col">
+				<div id="map" style="min-width: 330px; width: 500px; height: 500px;"></div>
 			</div>
-			</div>
-		</form>
-	</div>
+		
 
-	<div class="col-md-8" style="display: inline-block;">
-		<div id="map" style="width: 100%; height: 555px;"></div>
-	</div>
-
-	<div style="float:left; background-color:white" id="placeList"></div>
-
-	
-	
-	<div style="float:left; background-color:white">
-        	<c:url var="addSelection" value="/route"/>
-        		<form name="selected" method="POST" action="${addSelection}">
-        			<div id="selected"></div>
-   				<input type="submit" value="add locations">
-        		</form>
-    </div>
+		<div class="col">
+			<div class="card text-center placesList"
+				style="float: left; background-color: white; overflow-y: scroll; height: 500px; max-width: 330px;"
+				id="placeList"></div>
+		</div>
+</div>
 </div>
 
-    <script>
-        $(document).ready(function () {
-        	
-			$("#address").val(postedPlaceJSON.formatted_address);
-			var html = '';
-			var types = ['entertainment', 'cultural', 'night_life', 'sports', 'accomodations', 'restaurants', 'shopping', 'outdoor_recreation', 'public_transportation', 'medical_services', 'pet_care', 'other_services', 'spiritual'];
+<div style="float: left; background-color: white">
+	<c:url var="addSelection" value="/route" />
+	<form name="selected" method="POST" action="${addSelection}">
+		<div id="selected"></div>
+		<input type="submit" value="add locations">
+	</form>
+</div> 
 
-            $.each(types, function (index, value) {
-                var name = value.replace(/_/g, " ");
-                html += '<div><label><input type="checkbox" class="types" id="' + value + '"value="' + value + '" />' + capitalizeFirstLetter(name) + '</label></div>';
-            });
-            $('#type_holder').html(html);  
-            
-        });
-		
-		var postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON").attr("data-json")));
+	<script>
+		$(document)
+				.ready(
+						function() {
+
+							$("#address")
+									.val(postedPlaceJSON.formatted_address);
+							var html = '';
+							var types = [ 'entertainment', 'cultural',
+									'night_life', 'sports', 'accomodations',
+									'restaurants', 'shopping',
+									'outdoor_recreation',
+									'public_transportation',
+									'medical_services', 'pet_care',
+									'other_services', 'spiritual' ];
+
+							$
+									.each(
+											types,
+											function(index, value) {
+												var name = value.replace(/_/g,
+														" ");
+												html += '<div><label><input type="checkbox" class="types" id="' + value + '"value="' + value + '" />'
+														+ capitalizeFirstLetter(name)
+														+ '</label></div>';
+											});
+							$('#type_holder').html(html);
+
+						});
+
+		var postedPlaceJSON = JSON.parse(decodeURIComponent($("#placeJSON")
+				.attr("data-json")));
 		var lat = postedPlaceJSON.geometry.location.lat;
 		var lng = postedPlaceJSON.geometry.location.lng;
 		
@@ -188,7 +226,7 @@
         function callback(results, status) {
 
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-            		var html = '<h4>Nearby location details</h4><ul>';
+            		var html = '<h4>Location details</h4><ul>';
             		for (var i = 0; i < results.length; i++) {
             			
             			console.log("results[" + i + "]: ", results[i]);
@@ -245,7 +283,7 @@
 
 <!-- "<div style='float:left'><img src='https://maps.googleapis.com/maps/api/place/photo?photo_reference=CnRvAAAAwMpdHeWlXl-lH0vp7lez4znKPIWSWvgvZFISdKx45AwJVP1Qp37YOrH7sqHMJ8C-vBDC546decipPHchJhHZL94RcTUfPa1jWzo-rSHaTlbNtjh-N68RkcToUCuY9v2HNpo5mziqkir37WU8FJEqVBIQ4k938TI3e7bf8xq-uwDZcxoUbO_ZJzPxremiQurAYzCTwRhE_V0&key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8'"
  -->
- 
- <c:import url="/WEB-INF/jsp/footer.jsp" />
- 
-<!--  AIzaSyBvlZzcW-vTB5CPn8C63i6_INp0lOvkMdo -->
+
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
+
+	<!--  AIzaSyBvlZzcW-vTB5CPn8C63i6_INp0lOvkMdo -->

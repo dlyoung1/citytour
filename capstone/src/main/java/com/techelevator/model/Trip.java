@@ -13,6 +13,8 @@ public class Trip {
 	private LocalDateTime lastEditDate;
 	private LocalDateTime departureDate;
 	private int tripCityZipCode;
+	private double tripLatitude;
+	private double tripLongitude;
 	private String tripFormattedAddress;
 	private String tripCity;
 	private String tripState;
@@ -66,6 +68,22 @@ public class Trip {
 	public void setTripCityZipCode(int tripCityZipCode) {
 		this.tripCityZipCode = tripCityZipCode;
 	}
+	public double getTripLatitude() {
+		return tripLatitude;
+	}
+
+	public void setTripLatitude(double tripLatitude) {
+		this.tripLatitude = tripLatitude;
+	}
+
+	public double getTripLongitude() {
+		return tripLongitude;
+	}
+
+	public void setTripLongitude(double tripLongitude) {
+		this.tripLongitude = tripLongitude;
+	}
+
 	public String getTripFormattedAddress() {
 		return tripFormattedAddress;
 	}

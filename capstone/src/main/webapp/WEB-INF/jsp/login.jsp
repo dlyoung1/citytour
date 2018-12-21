@@ -33,7 +33,6 @@
 
  <div class="container">
 
- <button type='button' class="btn btn-warning" data-toggle="modal" data-target="#popUpWindow">Log In</button>
   
   <div class="modal fade" id="popUpWindow">
     <div class="modal-dialog">

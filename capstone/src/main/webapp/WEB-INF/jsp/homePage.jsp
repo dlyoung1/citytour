@@ -20,7 +20,7 @@ input[type=text] {
 	float: none;
 	margin-bottom: 50px;
 	word-wrap: break-word;
-	max-width: 700px;
+	max-width: 850px;
 }
 
 .container {
@@ -142,7 +142,7 @@ hr {
 <div id="homePageCard" class="card w-75 text-center border border-dark">
 	<c:url var="imgcitygifSrc" value="/img/citygif.gif" />
 	<div class="wrapper">
-		<%-- <img class="card-img grayscale" src="${imgcitygifSrc}" alt="Card image"> --%>
+		
 		<div class="card-img-overlay">
 			<h2 class="card-title" style="color:white">Are you looking to maximize your time in
 				a new city?</h2>

@@ -1,4 +1,4 @@
-		</div>
+<!-- 		</div>
 		
 		<footer>
 		<nav class="navbar navbar-light bg-light">
@@ -6,5 +6,5 @@
 			</nav>
 		</footer>
 	</body>
-</html>
+</html> -->
 

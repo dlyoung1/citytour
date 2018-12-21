@@ -315,7 +315,7 @@ div.container {
 				console.log("results[" + i + "]: ", results[i]);
 
 				createMarker(results[i], results[i].icon);
-				html += '<li class="places" id="' + results[i].name
+				html += '<li onmouseover="" style="cursor:pointer" class="places" id="' + results[i].name
 						+ '" data-value="'
 						+ encodeURIComponent(JSON.stringify(results[i])) + '">'
 						+ results[i].name + '</li>';

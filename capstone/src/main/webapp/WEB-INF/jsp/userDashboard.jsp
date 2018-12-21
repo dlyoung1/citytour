@@ -4,13 +4,61 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
 <c:url value="/users/${currentUser.userName}" var="rootUrl" />
+<style>
+.card {
+	background-color: rgb(25, 25, 25);
+	opacity: 0.8;
+	color: white;
+	width: 900px;
+	margin: 0 auto;
+}
+.card-title {
+	font-family: 'Special Elite', cursive;
+	font-size: 45px;
+}
+.lead {
+	font-family: 'Special Elite', cursive;
+}
+hr {
+	border-top: 3px double #8c8b8b;
+	width: 100%;
+}
+.routeBtn {
+	margin-right: 15px;
+}
+#header {
+	margin: 0 auto;
+	margin-top: 15px;
+}
+#userTrips {
+	margin: 0 auto;
+}
+h4 {
+	font-size: 35px;
+	text-decoration: underline;
+	font-weight: bold;
+	font-family: 'Special Elite', cursive;
+}
+#header.alert{
+	width: 800px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.alert {
+	width: 600px;
+	text-align: center
+}
+
+</style>
 
 <div class="container">
 
-	<div class="jumbotron">
-		<h1 class="display-4">My Saved Trips</h1>
-		<p class="lead">Edit and Delete your saved trips here</p>
-		<hr class="my-4">
+	<div class="card">
+		<div id="header" class="alert alert-dark">
+		<h1 class="card-title">My Saved Trips</h1>
+		<p class="lead">(Edit and Delete your saved trips here)</p>
+		</div>
+		<hr align="center">
 		<div id="userTrips">
 		</div>
 	</div>
@@ -46,8 +94,8 @@
 						'<div class="alert alert-dark" role="alert" data-tripId="' + tripId + '">' +
 						'<h4 class="alert-heading">'+ tripName + '</h4>' +
 						'<form method="POST" action="'+root+"/edit?tripId="+tripId+'">' +
-						'<input type="submit" class="btn btn-primary" value="Route Trip" role="button" id="editTrip' + tripId + '">' +
-						'<a class="btn btn-danger" href="#" role="button" id="deleteTrip' + tripId + '">Delete Trip</a>' +
+						'<input type="submit" class="routeBtn btn btn-warning" value="View Route" role="button" id="editTrip' + tripId + '">' +
+						'<a class="deleteBtn btn btn-warning" href="#" role="button" id="deleteTrip' + tripId + '">Delete Trip</a>' +
 						'</form>' +
 						'<hr>' +
 						'<p><b>Destination: </b>' + destination + ' • <b>Departure Date: </b> ' + departureDate + ' • <b>Creation Date: </b>' + createDate + '</p>' +

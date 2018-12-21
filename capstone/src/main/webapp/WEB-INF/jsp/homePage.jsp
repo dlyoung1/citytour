@@ -176,7 +176,7 @@ hr {
 <div id="discoverMore" class="card-columns">
 	<div class="card">
 		<c:url var="keyWestImg" value="/img/keywest.jpg" />
-		<img class="card-img-top" src="${keyWestImg}" alt="Card image cap">
+		<a href="https://www.travelandleisure.com/travel-guide/key-west"><img class="card-img-top" src="${keyWestImg}" alt="Card image cap"></a>
 		<div class="card-body">
 			<h5 class="card-title">Travel to Key West!</h5>
 			<p class="card-text">Beat the winter blues by getting a dose of
@@ -196,7 +196,7 @@ hr {
 	</div>
 	<div class="card">
 		<c:url var="breckCol" value="/img/breckenridge.jpg" />
-		<img class="card-img-top" src="${breckCol}" alt="Card image cap">
+		<a href="https://www.breckenridge.com/"><img class="card-img-top" src="${breckCol}" alt="Card image cap"></a>
 		<div class="card-body">
 			<h5 class="card-title">Get Cozy in Breckenridge!</h5>
 			<p class="card-text">Winter is a perfect time to take advantage
@@ -213,7 +213,7 @@ hr {
 	</div>
 	<div class="card">
 		<c:url var="lasVegasImg" value="/img/lasvegas.jpg" />
-		<img class="card-img-top" src="${lasVegasImg}" alt="Card image cap">
+		<a href="https://www.visitlasvegas.com/"><img class="card-img-top" src="${lasVegasImg}" alt="Card image cap"></a>
 		<div class="card-body">
 			<h5 class="card-title">Vegas is Calling Your Name!</h5>
 			<p class="card-text">With the Las Vegas Strip offering more than 4 miles worth
@@ -222,7 +222,7 @@ hr {
 	</div>
 	<div class="card">
 		<c:url var="Arizona" value="/img/Arizona.jpg" />
-		<img class="card-img" src="${Arizona}" alt="Card image">
+		<a href="https://visitsedona.com/"><img class="card-img" src="${Arizona}" alt="Card image"></a>
 	</div>
 	<div class="card p-3 text-right">
 		<blockquote class="blockquote mb-0">

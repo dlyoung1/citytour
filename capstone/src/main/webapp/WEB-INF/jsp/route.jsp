@@ -59,6 +59,15 @@
         	  });
         }
     </script>
+    <style>
+
+.container {
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 50px;
+} 
+   
+    </style>
     
 <c:if test="${not empty newTripJSON}">
     <input type="hidden" id="places" data-json="${newTripJSON}"/>
@@ -67,10 +76,15 @@
 <c:if test="${not empty savedTripJSON}">
     <input type="hidden" id="places" data-json="${savedTripJSON}"/>
 </c:if>
-	
 
+<%-- <c:if test="${not empty currentUser}">
+		<p id="currentUser"><span>${currentUser.userName}!</span></p>
+</c:if> --%>
+	
+	<div class="container">
     <div id = "map" style="width:500px; height:500px; display:inline-block; vertical-align:top"></div>
-    <div id="directionsPanel" style="display:inline-block;background-color:white;width:30%;height 100%"></div>
+    <div id="directionsPanel" style="display:inline-block;background-color:white; opacity: 0.8; width:500px; height: 500px; overflow: auto;"></div>
+    </div>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&libraries=places&callback=initMap"
         async defer></script>

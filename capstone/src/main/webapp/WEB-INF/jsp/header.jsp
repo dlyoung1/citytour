@@ -141,6 +141,8 @@
 				<li class="nav-item">
 					<a class="nav-link" href="${homePageHref}" style="font-family: 'Special Elite', cursive; font-size: 28px; color: rgb(255, 195, 0); font-weight: bold">City Tour</a>
 				</li>
+				<li class="nav-item loginLinks d-flex align-items-center">
+				<a class="nav-link" href="${homePageHref}">New Search</a></li>
 				<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/userDashboard" />
 					<li class="nav-item loginLinks d-flex align-items-center">

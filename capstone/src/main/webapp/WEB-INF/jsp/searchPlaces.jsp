@@ -327,10 +327,16 @@ div.container {
 /*             		imageHtml = '<img src="https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA7oumI2M6zv0ccOUtWU1aoHqIKp_qD6L8&photo_reference=' + photo + '" />' + '<br>';
  */           		imageHtml = '<img src="' + place.photos[0].getUrl({'maxWidth': 170, 'maxHeight': 170}) + '" />' + '<br>';
             }
-            
+            else {
+            	imageHtml = "";
+            }
+            var rating = "No reviews yet!";
+            if(place.rating != undefined) {
+            	var rating = place.rating + " out of 5"; 
+            }
             	
             google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent(imageHtml + place.name + '<br>' + place.vicinity);
+                infowindow.setContent(imageHtml + place.name + '<br>' + place.vicinity + '<br>' + '<div>Average Rating: </div>' + rating);
                 infowindow.open(map, this);
             });
         }

@@ -96,19 +96,6 @@ div.container {
 				</div>
 			</form>
 		</div>
-<<<<<<< HEAD
-		<div class="col">
-			<div id="map" style="min-width: 330px; width: 500px; height: 500px;"></div>
-		</div>
-
-
-		<div class="col">
-			<div class="card text-center placesList"
-				style="float: left; background-color: white; overflow-y: auto; height: 500px; max-width: 330px;"
-				id="placeList"></div>
-		</div>
-	</div>
-=======
 		
 			<div class="col" id="placeListCol" style="display: none;">
 				<div class="card text-center placesList"
@@ -124,7 +111,6 @@ div.container {
 
 </div>
 </div>
->>>>>>> d4b555e8ca77d14e3d1cc354257ce3a571a7c760
 
 <div style="float: left; background-color: white">
 	<c:url var="addSelection" value="/route" />
